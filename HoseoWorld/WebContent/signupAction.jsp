@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
-<jsp:useBean id="gb" scope="page" class="UserDatabase.Login"/>
-<jsp:useBean id="login" scope="page" class="UserDatabase.LoginDAO"/>
-<jsp:setProperty name="login" property="*"/>
-<%
+<%@ page import="UserDatabase.Login" %>
+<%@ page import="UserDatabase.LoginDAO" %>
+
+<jsp:useBean id="signup" scope="page" class="UserDatabase.LoginDAO"/>
+<jsp:setProperty name="signup" property="*"/>
+
+<% 
 	request.setCharacterEncoding("UTF-8");
 
 	String userID = request.getParameter("inputID");
