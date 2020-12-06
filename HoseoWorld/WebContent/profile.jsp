@@ -11,10 +11,12 @@
 <body  bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
 <%
 userDAO UserDAO=new userDAO();
-PrintWriter script = response.getWriter();
-String name=UserDAO.getName();
-String blog=UserDAO.getBlog();
-String mail=UserDAO.getEmail();
+
+String userID = (String)session.getAttribute("userID");
+
+UserDAO.getUser(userID);
+//String blog=UserDAO.getBlog();
+//String mail=UserDAO.getEmail();
 %>
 
 	<table>
@@ -25,7 +27,7 @@ String mail=UserDAO.getEmail();
 				</div>
 			</td>
 			<td width="480" height="450" background="./images/bg_center_rect.jpg">
-				이름 <% script.println(name);script.println(blog); script.println(mail);%> 성별 생년월일 이메일 <br>
+				이름 <%=userID%> 성별<% out.println(UserDAO.getId()); %> 생년월일 이메일 <br>
 				<input type="button" value="수정" onclick="location.href='./rev.jsp'">
 				<input type="button" value="회원탈퇴">
 			</td>

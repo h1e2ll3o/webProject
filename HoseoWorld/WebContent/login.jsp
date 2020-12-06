@@ -28,12 +28,13 @@
 			<td>패스워드</td>
 			<td><input type="password" placeholder="패스워드를 입력하시오" name="pw" size="20"/></td>
 		</tr>
+		<tr></tr>
 		<tr>
-			<td></td>
 			<td><input type="submit" value="로그인"></td>
+			<td><a href="./signup.jsp">회원가입</a></td>
 		</tr>
 		<tr>
-			<td><a href="./signup.jsp">회원가입</a></td>
+			<td></td>
 			<td></td>
 		</tr>
 	</table>
