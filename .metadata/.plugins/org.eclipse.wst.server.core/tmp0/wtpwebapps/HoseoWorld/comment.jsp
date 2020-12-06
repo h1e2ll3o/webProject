@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>방명록</title>
 </head>
-<body bgcolor="#F3F3F3" topmargin="0" leftmargin="0">
+<body topmargin="0" leftmargin="0">
 	<table>
 		<tr>
 			<td width="178" height="450" background="./images/bg_left_rect.jpg">
@@ -18,12 +18,12 @@
 
 			</td>
 			<td>
-				<input type="buttom" width="83" height="29" border="0" value="홈" onclick="location.href='./main.jsp'"><br><br>
-				<input type="button" width="83" height="29" border="0" value="프로필" onclick="location.href='./profile.html'"><br><br>
-				<input type="button" width="83" height="29" border="0" value="다이어리" onclick="location.href='./main.jsp'"><br><br>
-				<input type="button" width="83" height="29" border="0" value="사진첩" onclick="location.href='./main.jsp'"><br><br>
-				<input type="button" width="83" height="29" border="0" value="방명록" onclick="location.href='./comment.jsp'"><br><br>
-				 
+				<input type="image" width="70" height="35" border="0" onclick="location.href='./main.jsp'" src="./images/home.jpg"/><br>
+				<input type="image" width="70" height="35" border="0" onclick="location.href='./profile.html'" src="./images/profile.jpg"/><br>
+				<input type="image" width="70" height="35" border="0" onclick="location.href='./main.jsp'" src="./images/diary.jpg"/><br>
+				<input type="image" width="70" height="35" border="0" onclick="location.href='./main.jsp'" src="./images/photo.jpg"/><br>
+				<input type="image" width="70" height="35" border="0" onclick="location.href='./comment.jsp'" src="./images/comment.jpg"/><br><br><br><br><br><br>
+				
 				 
 				
 				 

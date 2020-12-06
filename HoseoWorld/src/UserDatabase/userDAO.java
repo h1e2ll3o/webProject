@@ -34,8 +34,8 @@ public class userDAO {
 	public int login(String id, String pw) {
 		try {
 			pstmt = conn.prepareStatement("select pw from login where id=?");
-			stmt.setString(1, id);
-			rs.stmt.executeQuery();
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				return rs.getString(1).equals(pw) ? 1 : 0;		// (1: 성공)(0: 비밀번호 틀림)
 			} else {return -2;}									//(-2: 아이디 없음)
@@ -63,7 +63,7 @@ public class userDAO {
 		if(!id_check(UserDAO.getId())) return 0;
 		
 		try {
-			pstmt = conn.prepareStatement("insert into login values (login_seq.nextval,?,?,?,?,?,?)");
+			pstmt = conn.prepareStatement("insert into login values (login_seq.nextval,?,?,?,?,?)");
 			
 			pstmt.setString(1, UserDAO.getId());
 			pstmt.setString(2, UserDAO.getPw());
@@ -87,7 +87,7 @@ public class userDAO {
 				UserDAO.setId(rs.getString(2));
 				UserDAO.setPw(rs.getString(3));
 				UserDAO.setName(rs.getString(4));
-				UserDAO.setBlog(rs.getString(5);
+				UserDAO.setBlog(rs.getString(5));
 				UserDAO.setEmail(rs.getString(6));
 			}
 		} catch(Exception e) {e.printStackTrace();}

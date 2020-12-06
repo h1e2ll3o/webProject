@@ -38,19 +38,19 @@
 		int result = UserDAO.signup(UserDAO);
 		
 		if(result == -1){
-			PrintWriter script = resonse.getWriter();
+			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('서버오류')");
 			script.println("history.back()"); 
 			script.println("</script>");
 		} else if(result == 0){
-			PrintWriter script = resonse.getWriter();
+			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('이미 아이디가 존재합니다.')");
 			script.println("history.back()"); 
 			script.println("</script>");
 		} else {
-			PrintWriter script = resonse.getWriter();
+			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('회원가입 되었습니다.')");
 			script.println("location.href = 'login.jsp'"); 

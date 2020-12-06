@@ -66,7 +66,7 @@
 			</tr>
 			<tr>
 				<td>블로그 이름</td>
-				<td><input type="text" name="BLOG" maxlength="20"/></td>
+				<td><input type="text" name="blog" maxlength="20"/></td>
 			</tr>
 			<tr>
 				<td></td>
