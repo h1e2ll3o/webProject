@@ -1,49 +1,62 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="UTF-8"%>
-<%@ page import="java.sql.*" %>
-<%@ page import="UserDatabase.Login" %>
-<%@ page import="UserDatabase.LoginDAO" %>
-
-<jsp:useBean id="signup" scope="page" class="UserDatabase.LoginDAO"/>
-<jsp:setProperty name="signup" property="*"/>
+<%@ page import="UserDatabase.userDAO" %>
+<%@ page import="java.io.PrintWriter" %>
+<%request.setCharacterEncoding("UTF-8");%>
+<!DOCTYPE html> 
+<html lang="ko"> 
+<head> 
+<meta charset="UTF-8"> 
+<title> join </title> 
+</head> 
+<body>
 
 <% 
-	request.setCharacterEncoding("UTF-8");
-
-	String userID = request.getParameter("inputID");
-	String userPW = request.getParameter("inputPW");
-	String userNAME = request.getParameter("inputNAME");
-	String userEMAIL = request.getParameter("inputEMAIL1") + '@' + request.getParameter("inputEMAIL2");
-	String userBLOG = request.getParameter("inputBLOG");
+	String id = request.getParameter("id");
+	String pw = request.getParameter("pw");
+	String name = request.getParameter("name");
+	String blog = request.getParameter("blog");
+	String email1 = request.getParameter("email1");
+	String email2 = request.getParameter("email2");
+	String email = email1 + '@' + email2;
 	
-    Connection conn = null;
-    PreparedStatement pstmt = null;
-
-	
-    String jdbcDriver = "oracle.jdbc.driver.OracleDriver";
-    String jdbcURL = "jdbc:oracle:thin:@localhost:1521:orcl";
-	
-    
-    try {
-        Class.forName(jdbcDriver);
-        conn = DriverManager.getConnection(jdbcURL, "scott", "hg0331");
-        
-        String sql = "INSERT INTO LOGIN (ID, PW, NAME, BLOG,EMAIL) VALUES(?,?,?,?,?)";
-        pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, userID);
-		pstmt.setString(2, userPW);
-		pstmt.setString(3, userNAME);
-		pstmt.setString(4, userBLOG);
-		pstmt.setString(5, userEMAIL);
-       	pstmt.executeUpdate(sql);
-        %> <script> alert("성공적으로 회원가입이 되었습니다.");</script> <%
-        response.sendRedirect("login.jsp");
-    } catch (Exception e) {
-        e.printStackTrace();
-       
-    }
-	
-    pstmt.close();
-    conn.close();
-    
+	if(id == null || pw == null || name == null || email1 == null){
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("alert('빈칸을 확인해 주세요')");
+		script.println("history.back()"); 
+		script.println("</script>");
+	} else{
+		userDAO UserDAO = new userDAO();
+		
+		UserDAO.setId(id);
+		UserDAO.setPw(pw);
+		UserDAO.setName(name);
+		UserDAO.setBlog(blog);
+		UserDAO.setEmail(email);
+		
+		int result = UserDAO.signup(UserDAO);
+		
+		if(result == -1){
+			PrintWriter script = resonse.getWriter();
+			script.println("<script>");
+			script.println("alert('서버오류')");
+			script.println("history.back()"); 
+			script.println("</script>");
+		} else if(result == 0){
+			PrintWriter script = resonse.getWriter();
+			script.println("<script>");
+			script.println("alert('이미 아이디가 존재합니다.')");
+			script.println("history.back()"); 
+			script.println("</script>");
+		} else {
+			PrintWriter script = resonse.getWriter();
+			script.println("<script>");
+			script.println("alert('회원가입 되었습니다.')");
+			script.println("location.href = 'login.jsp'"); 
+			script.println("</script>");
+		}
+	}
 %>
+</body>
+</html>

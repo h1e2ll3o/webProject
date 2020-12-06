@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR" %>
-<%@ page import="UserDatabase.Login" %>
-<%@ page import="UserDatabase.LoginDAO" %>
+<%@ page import="UserDatabase.userDAO" %>
+<%request.setCharacterEncoding("UTF-8");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,11 +40,11 @@
 		<table>
 			<tr>
 				<td>아이디</td>
-				<td><input type="text" name="inputID" maxlength="15"/></td>
+				<td><input type="text" name="id" maxlength="15"/></td>
 			</tr>
 			<tr>
 				<td>패스워드</td>
-				<td><input type="password" name="inputPW" maxlength="15"/></td>
+				<td><input type="password" name="pw" maxlength="15"/></td>
 			</tr>
 			<tr>
 				<td>패스워드 확인</td>
@@ -52,12 +52,12 @@
 			</tr>
 			<tr>
 				<td>이름</td>
-				<td><input type="text" name="inputNAME" maxlength="15"/></td>
+				<td><input type="text" name="name" maxlength="15"/></td>
 			</tr>
 			<tr>
 				<td>이메일</td>
-				<td><input type="text" name="inputEMAIL1"/> @
-				<select name="inputEMAIL2">
+				<td><input type="text" name="email1"/> @
+				<select name="email2">
 					<option>vision.hoseo.edu</option>
 					<option>naver.com</option>
 					<option>gmail.com</option>

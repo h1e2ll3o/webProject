@@ -1,0 +1,106 @@
+package UserDatabase;
+
+import java.sql.*;
+import java.util.*;
+
+public class LoginDAO {
+	
+	private String no;
+	private String id;
+	private String pw;
+	private String name;
+	private String blog;
+	private String email;
+	
+	private Connection conn = null;
+	private ResultSet rs = null;
+	PreparedStatement pstmt = null;
+
+	
+	//데이터베이스 연동 관련 정보 문서 선언
+	String jdbcDriver = "oracle.jdbc.driver.OracleDriver";
+	String jdbcURL = "jdbc:oracle:thin:@localhost:1521:orcl";
+	
+	void connect() {
+		try {
+			//드라이브 로드
+			Class.forName(jdbcDriver);
+			//데이터베이스 연결
+		    conn = DriverManager.getConnection(jdbcURL,"scott","hg0331");
+		} catch (Exception e) {	e.printStackTrace();}
+	}
+	
+	public int login(String id, String pw) {
+		try {
+			pstmt = conn.prepareStatement("select pw from login where id=?");
+			stmt.setString(1, id);
+			rs.stmt.executeQuery();
+			if(rs.next()) {
+				return rs.getString(1).equals(pw) ? 1 : 0;		// (1: 성공)(0: 비밀번호 틀림)
+			} else {return -2;}									//(-2: 아이디 없음)
+		} catch(Exception e) {
+			e.printStackTrace();
+			return -1;											// (-1: 서버오류)
+		}
+	}
+	
+	public boolean id_check(String id) {
+		try {
+			pstmt = conn.prepareStatement("select * from login where id=?");
+			pstmt.setString(1,id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return false;									//중복 있음
+			} else {return true;}								//중복 없음
+		} catch(Exception e) {e.printStackTrace();}
+		return false;
+	}
+	
+	void disconnect() {
+		if(pstmt != null) {										// 연결된 상태
+			try {
+				pstmt.close();									// 연결 끊기
+			}catch(Exception e) {e.printStackTrace();}
+		}
+		if(conn != null) {										// 연결된 상태
+			try {
+				conn.close();									// 연결 끊기
+			}catch(Exception e) {e.printStackTrace();}
+		}
+	}
+	
+	public boolean updateDB() {
+		return true;
+	}
+	
+	public boolean insertDB(Login login) {
+		connect();
+		String sql = "insert into login(id, pw, name, blog, email) values (?,?,?,?,?) ";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, );
+		}catch(Exception e) {e.printStackTrace();}
+		
+		return true;
+	}
+	
+	public boolean deleteDB(String userID) {
+		
+		return true;
+	}
+	
+	public String getNo() {return no;}
+	public void setNo(String no) {this.no = no;}
+	public String getId() {return id;}
+	public void setId(String id) {this.id = id;}
+	public String getPw() {return pw;}
+	public void setPw(String pw) {this.pw = pw;}
+	public String getName() {return name;}
+	public void setName(String name) {this.name = name;}
+	public String getBlog() {return blog;}
+	public void setBlog(String blog) {this.blog = blog;}
+	public String getEmail() {return email;}
+	public void setEmail(String email) {this.email = email;}
+	
+}

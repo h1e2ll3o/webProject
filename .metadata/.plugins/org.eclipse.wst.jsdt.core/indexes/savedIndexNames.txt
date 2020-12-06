@@ -1,9 +1,7 @@
-INDEX VERSION 1.4+C:\Users\lhg45\webProject\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+INDEX VERSION 1.4+C:\Users\user\Documents\webProject\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+2321312115.index
+1742571267.index
+1467797967.index
+833733146.index
+3055606269.index
 687044298.index
-1379604812.index
-1112942076.index
-2488314281.index
-3820821013.index
-1467797967.index
-2161122853.index
-1467797967.index

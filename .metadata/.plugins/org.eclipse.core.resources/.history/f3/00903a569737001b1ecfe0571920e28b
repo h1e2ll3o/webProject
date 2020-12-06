@@ -1,0 +1,20 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="UTF-8"%>
+<%@ page import="UserDatabase.userDAO" %>
+
+<jsp:useBean id="signup" scope="page" class="UserDatabase.LoginDAO"/>
+<jsp:setProperty name="signup" property="*"/>
+
+<% 
+	request.setCharacterEncoding("UTF-8");
+
+	String id = request.getParameter("id");
+	String pw = request.getParameter("pw");
+	String name = request.getParameter("name");
+	String blog = request.getParameter("blog");
+	String email1 = request.getParameter("email1");
+	String email2 = request.getParameter("email2");
+	String email = email1 + '@' + email2;
+	
+	if(id == null || pw == null || name == null || email1 == null)
+%>

@@ -1,0 +1,49 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
+<%@ page import="UserDatabase.Login" %>
+<%@ page import="UserDatabase.LoginDAO" %>
+
+<jsp:useBean id="signup" scope="page" class="UserDatabase.LoginDAO"/>
+<jsp:setProperty name="signup" property="*"/>
+
+<% 
+	request.setCharacterEncoding("UTF-8");
+
+	String id = request.getParameter("id");
+	String pw = request.getParameter("pw");
+	String name = request.getParameter("name");
+	String email = request.getParameter("email1") + '@' + request.getParameter("email2");
+	String blog = request.getParameter("blog");
+	
+    Connection conn = null;
+    PreparedStatement pstmt = null;
+
+	
+    String jdbcDriver = "oracle.jdbc.driver.OracleDriver";
+    String jdbcURL = "jdbc:oracle:thin:@localhost:1521:orcl";
+	
+    
+    try {
+        Class.forName(jdbcDriver);
+        conn = DriverManager.getConnection(jdbcURL, "scott", "hg0331");
+        
+        String sql = "INSERT INTO LOGIN (ID, PW, NAME, BLOG,EMAIL) VALUES(?,?,?,?,?)";
+        pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, userID);
+		pstmt.setString(2, userPW);
+		pstmt.setString(3, userNAME);
+		pstmt.setString(4, userBLOG);
+		pstmt.setString(5, userEMAIL);
+       	pstmt.executeUpdate(sql);
+        %> <script> alert("성공적으로 회원가입이 되었습니다.");</script> <%
+        response.sendRedirect("login.jsp");
+    } catch (Exception e) {
+        e.printStackTrace();
+       
+    }
+	
+    pstmt.close();
+    conn.close();
+    
+%>

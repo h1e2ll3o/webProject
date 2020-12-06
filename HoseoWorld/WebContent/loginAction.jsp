@@ -1,50 +1,52 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.sql.*"%>
-<%
-    //내 db 접속에 사용할 conn 변수
-    Connection conn = null;
-	PreparedStatement stmt = null;
-	ResultSet rs = null;		// ResultSet클래스 : 결과값을 행으로 저장
-    //오라클 드라이버 경로 설정
-    String driver = "oracle.jdbc.driver.OracleDriver";
-    //내 db의 계정 경로 설정
-    String url = "jdbc:oracle:thin:@localhost:1521:orcl";
+<%@ page import="UserDatabase.userDAO" %>
+<%@ page import="java.io.PrintWriter" %>
+<%request.setCharacterEncoding("UTF-8");%>
+<!DOCTYPE html> 
+<html lang="ko"> 
+<head> 
+<meta charset="UTF-8"> 
+<title> login </title> 
+</head> 
+<body>
 
-    
-    //db 접속 코드는 반드시 try~catch문 안에 써줘야함
-    try {
-        //오라클 드라이버 접속
-        Class.forName(driver);
-        //내 db 접속
-        conn = DriverManager.getConnection(url, "scott", "hg0331");
+<% 
+	String id = request.getParameter("id");
+	String pw = request.getParameter("pw");
 
-        stmt = conn.prepareStatement("SELECT * FROM LOGIN WHERE ID = ? AND PW = ?");
-        stmt.setString(1, request.getParameter("inputID"));
-        stmt.setString(2, request.getParameter("inputPW"));
-  
-        rs = stmt.executeQuery();
-        
-        if(rs.next()){
-        	String ID = rs.getString("ID");
-        	String PW = rs.getString("PW");
-        	
-        	session.setAttribute("id", ID);
-        	session.setAttribute("pw", PW);
-        	
-        	response.sendRedirect("main.jsp");
-        } else{
-        	%> <script> alert("로그인 실패"); history.go(-1); </script> <%
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-    } finally{
-    	try{
-    		if(rs != null) rs.close();
-    		if(stmt != null) stmt.close();
-    		if(conn != null) conn.close();
-    	} catch(Exception e){
-    		e.printStackTrace();
-    	}
-    }
+	
+	if(id == null || pw == null){
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("alert('빈칸을 확인해 주세요')");
+		script.println("history.back()"); 
+		script.println("</script>");
+	} else{
+		userDAO UserDAO = new userDAO();
+		int result = UserDAO.login("id", id);
+		
+		if(result == 1){
+			session.setAttribute("userID", id);				//세션 : 사용자 ID -> userID 
+			PrintWriter script = resonse.getWriter();
+			script.println("<script>");
+			script.println("alert('로그인 성공')");
+			script.println("location.href='./main.jsp'"); 
+			script.println("</script>");
+		} else if(result == 0 || result == -1){
+			PrintWriter script = resonse.getWriter();
+			script.println("<script>");
+			script.println("alert('아이디 또는 비밀번호를 확인해주세요.')");
+			script.println("history.back()"); 
+			script.println("</script>");
+		} else if(result == -2){
+			PrintWriter script = resonse.getWriter();
+			script.println("<script>");
+			script.println("alert('서버 오류입니다..')");
+			script.println("location.href='./login.jsp'"); 
+			script.println("</script>");
+		}
+	}
 %>
+</body>
+</html>

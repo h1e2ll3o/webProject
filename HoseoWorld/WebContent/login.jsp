@@ -22,11 +22,11 @@
 	<table>
 		<tr>
 			<td>아이디</td>
-			<td><input type="text" placeholder="아이디를 입력하시오" name="inputID" size="20"/></td>
+			<td><input type="text" placeholder="아이디를 입력하시오" name="id" size="20"/></td>
 		</tr>
 		<tr>
 			<td>패스워드</td>
-			<td><input type="password" placeholder="패스워드를 입력하시오" name="inputPW" size="20"/></td>
+			<td><input type="password" placeholder="패스워드를 입력하시오" name="pw" size="20"/></td>
 		</tr>
 		<tr>
 			<td></td>
@@ -34,7 +34,7 @@
 		</tr>
 		<tr>
 			<td><a href="./signup.jsp">회원가입</a></td>
-			<td><a href="">아이디</a>/<a href="">패스워드 찾기</a></td>
+			<td></td>
 		</tr>
 	</table>
 	</form>
