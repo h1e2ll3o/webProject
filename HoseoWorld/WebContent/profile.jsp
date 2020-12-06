@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ page import="UserDatabase.userDAO" %>
+<%@ page import="java.io.PrintWriter" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +9,13 @@
 <title>프로필</title>
 </head>
 <body  bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
-
+<%
+userDAO UserDAO=new userDAO();
+PrintWriter script = response.getWriter();
+String name=UserDAO.getName();
+String blog=UserDAO.getBlog();
+String mail=UserDAO.getEmail();
+%>
 
 	<table>
 		<tr>
@@ -17,7 +25,7 @@
 				</div>
 			</td>
 			<td width="480" height="450" background="./images/bg_center_rect.jpg">
-				이름 성별 생년월일 이메일 <br>
+				이름 <% script.println(name);script.println(blog); script.println(mail);%> 성별 생년월일 이메일 <br>
 				<input type="button" value="수정" onclick="location.href='./rev.jsp'">
 				<input type="button" value="회원탈퇴">
 			</td>
