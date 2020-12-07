@@ -15,7 +15,9 @@
 				</div>
 			</td>
 			<td width="480" height="450" background="./images/bg_center_rect.jpg">
-
+<div align=center>
+					<iframe frameborder="0" width="480" height="440" src="./comment_content.jsp"></iframe>
+				</div>
 			</td>
 			<td>
 				<input type="image" width="70" height="35" border="0" onclick="location.href='./main.jsp'" src="./images/home.jpg"/><br>
