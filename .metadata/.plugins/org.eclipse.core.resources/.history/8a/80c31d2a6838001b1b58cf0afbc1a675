@@ -1,0 +1,77 @@
+package UserDatabase;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class PhotoBean {
+	private Connection conn = null;
+	private ResultSet rs = null;
+	PreparedStatement pstmt = null;
+		
+	//데이터베이스 연동 관련 정보 문서 선언
+	String jdbcDriver = "oracle.jdbc.driver.OracleDriver";
+	String jdbcURL = "jdbc:oracle:thin:@localhost:1521:orcl";
+	
+	//데이터베이스 연결
+	void connect() {
+		try {
+			//드라이브 로드
+			Class.forName(jdbcDriver);
+			//데이터베이스 연결
+		    conn = DriverManager.getConnection(jdbcURL,"scott","hg0331");
+		} catch (Exception e) {	e.printStackTrace();}
+	}
+	
+	void disconnect() {
+		if(pstmt != null) {
+			try {
+				pstmt.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if(conn != null) {
+			try {
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	// 게시물 개수
+	public int getMaxNum() {
+		connect();
+		
+		int maxNum = 0;
+		try {
+			String sql = "select nvl(max(no),0) from photo";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				maxNum = rs.getInt(1);
+			}
+			disconnect();
+		} catch(Exception e) {
+			System.out.println(e.toString());
+		}
+		return maxNum;
+	}
+	
+	// 게시물 입력
+	public void insert(Photo update) {
+		connect();
+		try {
+			String sql="insert into photo values (photo_seq.nextval, ?,?,?)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, update.getId());
+			pstmt.setString(2, update.getSubject());
+			pstmt.setString(3, update.getSavefilename());
+		}
+		
+	}
+}

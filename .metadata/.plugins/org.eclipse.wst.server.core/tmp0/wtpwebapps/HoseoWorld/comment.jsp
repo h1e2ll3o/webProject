@@ -24,9 +24,6 @@
 				<input type="image" width="70" height="35" border="0" onclick="location.href='./main.jsp'" src="./images/photo.jpg"/><br>
 				<input type="image" width="70" height="35" border="0" onclick="location.href='./comment.jsp'" src="./images/comment.jpg"/><br><br><br><br><br><br>
 				
-				 
-				
-				 
 			</td>
 		</tr>
 	</table>

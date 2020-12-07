@@ -1,16 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="UTF-8"%>
-<%@ page import="UserDatabase.userDAO" %>
-<%@ page import="java.io.PrintWriter" %>
-<%request.setCharacterEncoding("UTF-8");%>
-<!DOCTYPE html> 
-<html lang="ko"> 
-<head> 
-<meta charset="UTF-8"> 
-<title> join </title> 
-</head> 
-<body>
+    pageEncoding="UTF-8" import="UserDatabase.*, java.util.*"%>
+<%request.setCharacterEncoding("utf-8");%>
 
+<jsp:useBean id="user" class="UserDatabase.User"/>
+<jsp:useBean id="userbean" class="UserDatabase.UserBean"/>
+<jsp:setProperty name="user" property="*"/>
 <% 
 	String id = request.getParameter("id");
 	String pw = request.getParameter("pw");
@@ -20,43 +14,22 @@
 	String email2 = request.getParameter("email2");
 	String email = email1 + '@' + email2;
 	
-	if(id == null || pw == null || name == null || email1 == null){
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('빈칸을 확인해 주세요')");
-		script.println("history.back()"); 
-		script.println("</script>");
-	} else{
-		userDAO UserDAO = new userDAO();
-		
-		UserDAO.setId(id);
-		UserDAO.setPw(pw);
-		UserDAO.setName(name);
-		UserDAO.setBlog(blog);
-		UserDAO.setEmail(email);
-		
-		int result = UserDAO.signup(UserDAO);
-		
-		if(result == -1){
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('서버오류')");
-			script.println("history.back()"); 
-			script.println("</script>");
-		} else if(result == 0){
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('이미 아이디가 존재합니다.')");
-			script.println("history.back()"); 
-			script.println("</script>");
-		} else {
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('회원가입 되었습니다.')");
-			script.println("location.href = 'login.jsp'"); 
-			script.println("</script>");
+	user.setId(id);
+	user.setPw(pw);
+	user.setName(name);
+	user.setBlog(blog);
+	user.setEmail(email);
+	
+	if(userbean.check_id(id)==1){
+		if(userbean.insert(user)){
+			response.sendRedirect("login.jsp");
+		} else{
+			%><script>alert('입력오류');history.back(-1);</script><%
 		}
+	} else if(userbean.check_id(id)==0){
+		%><script>alert('아이디 중복');history.back(-1);</script><%
 	}
+	
+
 %>
-</body>
-</html>
+

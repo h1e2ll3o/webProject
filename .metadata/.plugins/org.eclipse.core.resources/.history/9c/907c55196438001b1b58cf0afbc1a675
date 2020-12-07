@@ -1,0 +1,163 @@
+package UserDatabase;
+
+import java.sql.*;
+import java.util.*;
+
+public class UserBean {
+	UserDatabase.DBconnect connect = new UserDatabase.DBconnect();
+	
+	public boolean update(User user) {
+		connect.connect();
+		
+		String sql="update login set id=?, pw=?, name=?, blog=?, email=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user.getId());
+			pstmt.setString(2, user.getPw());
+			pstmt.setString(3, user.getName());
+			pstmt.setString(4, user.getBlog());
+			pstmt.setString(5, user.getEmail());
+			pstmt.executeUpdate();
+			disconnect();
+			return true;
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public boolean delete(String id) {
+		connect();
+		
+		String sql = "delete from login where id=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.executeUpdate();
+			disconnect();
+			return true;
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public boolean insert(User user) {
+		connect();
+		String sql = "insert into login values (login_seq.nextval, ?, ?, ?, ?, ?)";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user.getId());
+			pstmt.setString(2, user.getPw());
+			pstmt.setString(3, user.getName());
+			pstmt.setString(4, user.getBlog());
+			pstmt.setString(5, user.getEmail());
+			pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		finally {
+			disconnect();
+		}
+		return true;
+	}
+	
+	public ArrayList<User> getDBList(){
+		connect();
+		ArrayList<User> datas = new ArrayList<User>();
+		
+		String sql = "select * from login order by no desc";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				User user = new User();
+				user.setNo(rs.getInt("no"));
+				user.setId(rs.getString("id"));
+				user.setPw(rs.getString("pw"));
+				user.setName(rs.getString("name"));
+				user.setBlog(rs.getString("blog"));
+				user.setEmail(rs.getString("email"));
+				datas.add(user);
+			}
+			rs.close();
+			disconnect();
+		
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			disconnect();
+		}
+		return datas;
+	}
+	
+	public User getDB(String id) {
+		connect();
+		
+		String sql = "select * from login where id=?";
+		User user = new User();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,id);
+			rs = pstmt.executeQuery();
+			
+			rs.next();
+			user.setNo(rs.getInt("no"));
+			user.setId(rs.getString("id"));
+			user.setPw(rs.getString("pw"));
+			user.setName(rs.getString("name"));
+			user.setBlog(rs.getString("blog"));
+			user.setEmail(rs.getString("email"));
+			rs.close();
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			disconnect();
+		}
+		return user;
+	}
+	
+	public boolean check_id(String id) {
+		connect();
+		String sql = "select * from login id = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,id);
+			rs = pstmt.executeQuery();
+			
+			disconnect();
+			if(rs.next()) {return false;}
+			else {return true;}
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public boolean login(String id, String pw) {
+		connect();
+		String sql = "select pw from login where id=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				if(rs.getString(1).equals(pw)) {
+					return true;
+				}else {return false;}
+			} else
+				return false;
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+}
+

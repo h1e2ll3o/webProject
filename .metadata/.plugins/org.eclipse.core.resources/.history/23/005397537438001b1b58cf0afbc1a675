@@ -1,0 +1,138 @@
+package UserDatabase;
+
+import java.sql.*;
+import java.util.*;
+
+public class PhotoBean {
+	private Connection conn = null;
+	private ResultSet rs = null;
+	PreparedStatement pstmt = null;
+		
+	//데이터베이스 연동 관련 정보 문서 선언
+	String jdbcDriver = "oracle.jdbc.driver.OracleDriver";
+	String jdbcURL = "jdbc:oracle:thin:@localhost:1521:orcl";
+	
+	//데이터베이스 연결
+	void connect() {
+		try {
+			//드라이브 로드
+			Class.forName(jdbcDriver);
+			//데이터베이스 연결
+		    conn = DriverManager.getConnection(jdbcURL,"scott","hg0331");
+		} catch (Exception e) {	e.printStackTrace();}
+	}
+	
+	void disconnect() {
+		if(pstmt != null) {
+			try {
+				pstmt.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if(conn != null) {
+			try {
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	// 게시물 개수
+	public int getMaxNum() {
+		connect();
+		
+		int maxNum = 0;
+		try {
+			String sql = "select nvl(max(no),0) from photo";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				maxNum = rs.getInt(1);
+			}
+			disconnect();
+		} catch(Exception e) {
+			System.out.println(e.toString());
+		}
+		return maxNum;
+	}
+	
+	// 게시물 입력
+	public void insert(Photo update) {
+		connect();
+		try {
+			String sql="insert into photo values (?, ?,?,?)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, update.getNo());
+			pstmt.setString(2, update.getId());
+			pstmt.setString(3, update.getSubject());
+			pstmt.setString(4, update.getSavefilename());
+			pstmt.executeUpdate();
+			
+			disconnect();
+		} catch(Exception e) {
+			System.out.println(e.toString());
+		}
+	}
+	//게시물 전체 조회
+	public ArrayList<Photo> getDBList(String id){
+		connect();
+		ArrayList<Photo> lists = new ArrayList<Photo>();
+		try {
+			String sql = "select * from photo where id = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Photo photo = new Photo();
+				photo.setNo(rs.getInt("no"));
+				photo.setId(rs.getString("id"));
+				photo.setSubject(rs.getString("subject"));
+				photo.setSavefilename(rs.getString("savefilename"));
+				
+				lists.add(photo);
+			}
+			disconnect();
+			
+		} catch(Exception e) {
+			System.out.println(e.toString());
+		}
+		return lists;
+	}
+	
+	//특정 게시물 조회
+	public Photo getRead(int no) {
+		Photo photo = null;
+		connect();
+		try {
+			String sql = "select * from photo where no = ?";
+		}
+		
+	}
+	
+	
+	public void delete(int no) {
+		connect();
+		try {
+			String sql = "delete photo where no=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			pstmt.executeUpdate();
+			disconnect();
+		} catch(Exception e) {
+			System.out.println(e.toString());
+		}
+	}
+	
+	public int getDataCount() {
+		connect();
+		
+		int totalDataCount = 0;
+		try {
+			String sql = "select nvl(count(*),0) from photo";
+		}
+	}
+}

@@ -1,0 +1,25 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="UTF-8"%>
+<%@ page import="UserDatabase.User" %>
+<%@ page import="UserDatabase.UserBean" %>
+<%request.setCharacterEncoding("UTF-8");%>
+
+<jsp:useBean id="userbean" class="UserDatabase.User"/>
+<jsp:useBean id="user" class="UserDatabase.UserBean"/>
+<jsp:setProperty name="user" property="*"/>
+<% 
+	String id = request.getParameter("id");
+	String pw = request.getParameter("pw");
+	String name = request.getParameter("name");
+	String blog = request.getParameter("blog");
+	String email1 = request.getParameter("email1");
+	String email2 = request.getParameter("email2");
+	String email = email1 + '@' + email2;
+	
+	if(id == null || pw == null || name == null || email1 == null){
+		%><script>alert('빈칸을 채워주세요.');history.back();</script><%
+	} else{
+		
+	}
+%>
+

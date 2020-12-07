@@ -1,0 +1,180 @@
+package UserDatabase;
+
+import java.sql.*;
+import java.util.*;
+
+public class UserBean {
+	private Connection conn = null;
+	private ResultSet rs = null;
+	PreparedStatement pstmt = null;
+		
+	//데이터베이스 연동 관련 정보 문서 선언
+	String jdbcDriver = "oracle.jdbc.driver.OracleDriver";
+	String jdbcURL = "jdbc:oracle:thin:@localhost:1521:orcl";
+	
+	//데이터베이스 연결
+	void connect() {
+		try {
+			//드라이브 로드
+			Class.forName(jdbcDriver);
+			//데이터베이스 연결
+		    conn = DriverManager.getConnection(jdbcURL,"scott","hg0331");
+		} catch (Exception e) {	e.printStackTrace();}
+	}
+	
+	void disconnect() {
+		if(pstmt != null) {
+			try {
+				pstmt.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if(conn != null) {
+			try {
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public boolean update(User user) {
+		connect();
+		
+		String sql="update login set id=?, pw=?, name=?, blog=?, email=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user.getId());
+			pstmt.setString(2, user.getPw());
+			pstmt.setString(3, user.getName());
+			pstmt.setString(4, user.getBlog());
+			pstmt.setString(5, user.getEmail());
+			pstmt.executeUpdate();
+			disconnect();
+			return true;
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public boolean delete(String id) {
+		connect();
+		
+		String sql = "delete from login where id=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.executeQuery();
+			disconnect();
+			return true;
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public boolean insert(User user) {
+		connect();
+		String sql = "insert into login values (login_seq.nextval, ?, ?, ?, ?, ?)";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user.getId());
+			pstmt.setString(2, user.getPw());
+			pstmt.setString(3, user.getName());
+			pstmt.setString(4, user.getBlog());
+			pstmt.setString(5, user.getEmail());
+			pstmt.executeQuery();
+			disconnect();
+			return true;
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public ArrayList<User> getDBList(){
+		connect();
+		ArrayList<User> datas = new ArrayList<User>();
+		
+		String sql = "select * from login order by no desc";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				User user = new User();
+				user.setNo(rs.getInt("no"));
+				user.setId(rs.getString("id"));
+				user.setPw(rs.getString("pw"));
+				user.setName(rs.getString("name"));
+				user.setBlog(rs.getString("blog"));
+				user.setEmail(rs.getString("email"));
+			}
+		}
+	}
+	//로그인
+	public int login(String id, String pw) {
+		try {
+			pstmt = conn.prepareStatement("select pw from login where id=?");
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getString(1).equals(pw) ? 1 : 0;		// (1: 성공)(0: 비밀번호 틀림)
+			} else {return -2;}									//(-2: 아이디 없음)
+		} catch(Exception e) {
+			e.printStackTrace();
+			return -1;											// (-1: 서버오류)
+		}
+	}
+	
+	//아이디 중복 확인
+	public boolean id_check(String id) {
+		try {
+			pstmt = conn.prepareStatement("select * from login where id=?");
+			pstmt.setString(1,id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return false;									//중복 있음
+			} else {return true;}								//중복 없음
+		} catch(Exception e) {e.printStackTrace();}
+		return false;
+	}
+	
+	//회원가입
+	public int signup(userDAO UserDAO) {
+		if(!id_check(UserDAO.getId())) return 0;
+		
+		try {
+			pstmt = conn.prepareStatement("insert into login values (login_seq.nextval,?,?,?,?,?)");
+			
+			pstmt.setString(1, UserDAO.getId());
+			pstmt.setString(2, UserDAO.getPw());
+			pstmt.setString(3, UserDAO.getName());
+			pstmt.setString(4, UserDAO.getBlog());
+			pstmt.setString(5, UserDAO.getEmail());
+			
+			return pstmt.executeUpdate();
+		} catch (Exception e) { e.printStackTrace(); return -1;}
+	}
+	
+	//사용자 데이터 가져오기
+	public userDAO getUser(String id) {
+		try {
+			pstmt = conn.prepareStatement("select * from login where id=?");
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				userDAO UserDAO = new userDAO();
+				
+				UserDAO.setId(rs.getString(2));
+				UserDAO.setPw(rs.getString(3));
+				UserDAO.setName(rs.getString(4));
+				UserDAO.setBlog(rs.getString(5));
+				UserDAO.setEmail(rs.getString(6));
+			}
+		} catch(Exception e) {e.printStackTrace();}
+		return null;
+	}
+}

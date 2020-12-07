@@ -1,0 +1,56 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="UTF-8"%>
+<%@ page import="UserDatabase.User" %>
+<%@ page import="UserDatabase.UserBean" %>
+<%request.setCharacterEncoding("UTF-8");%>
+
+<jsp:useBean id="userbean" class="UserDatabase.User"/>
+<jsp:useBean id="user" class="UserDatabase.UserBean"/>
+<% 
+	String id = request.getParameter("id");
+	String pw = request.getParameter("pw");
+	String name = request.getParameter("name");
+	String blog = request.getParameter("blog");
+	String email1 = request.getParameter("email1");
+	String email2 = request.getParameter("email2");
+	String email = email1 + '@' + email2;
+	
+	if(id == null || pw == null || name == null || email1 == null){
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("alert('빈칸을 확인해 주세요')");
+		script.println("history.back()"); 
+		script.println("</script>");
+	} else{
+		userDAO UserDAO = new userDAO();
+		
+		UserDAO.setId(id);
+		UserDAO.setPw(pw);
+		UserDAO.setName(name);
+		UserDAO.setBlog(blog);
+		UserDAO.setEmail(email);
+		
+		int result = UserDAO.signup(UserDAO);
+		
+		if(result == -1){
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('서버오류')");
+			script.println("history.back()"); 
+			script.println("</script>");
+		} else if(result == 0){
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('이미 아이디가 존재합니다.')");
+			script.println("history.back()"); 
+			script.println("</script>");
+		} else {
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('회원가입 되었습니다.')");
+			script.println("location.href = 'login.jsp'"); 
+			script.println("</script>");
+		}
+	}
+%>
+
