@@ -21,9 +21,9 @@
 			</td>
 			<td>
 				<input type="image" width="70" height="35" border="0" onclick="location.href='./main.jsp'" src="./images/home.jpg"/><br>
-				<input type="image" width="70" height="35" border="0" onclick="location.href='./profile.html'" src="./images/profile.jpg"/><br>
-				<input type="image" width="70" height="35" border="0" onclick="location.href='./main.jsp'" src="./images/diary.jpg"/><br>
-				<input type="image" width="70" height="35" border="0" onclick="location.href='./main.jsp'" src="./images/photo.jpg"/><br>
+				<input type="image" width="70" height="35" border="0" onclick="location.href='./profile.jsp'" src="./images/profile.jpg"/><br>
+				<input type="image" width="70" height="35" border="0" onclick="location.href='./diary_total.jsp'" src="./images/diary.jpg"/><br>
+				<input type="image" width="70" height="35" border="0" onclick="location.href='./photo.jsp'" src="./images/photo.jpg"/><br>
 				<input type="image" width="70" height="35" border="0" onclick="location.href='./comment.jsp'" src="./images/comment.jpg"/><br><br><br><br><br><br>
 				
 			</td>

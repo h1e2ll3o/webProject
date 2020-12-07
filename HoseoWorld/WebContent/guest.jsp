@@ -26,14 +26,14 @@ try{
 	Class.forName(driver);
 	
 	conn = DriverManager.getConnection(url, "hr", "hr");
-	String sql = "insert into comment1 values(comment1_seq.nextval,?,?,?)";
+	String sql = "insert into comment2 values(comment2_seq.nextval,?,?,?)";
 	pstmt = conn.prepareStatement(sql); 
-	Clob clob=conn.createClob();
+
 	pstmt.setString(1,sf.format(nowTime));
 	pstmt.setString(2,comment);
 	pstmt.setString(3,id);
 	int res=pstmt.executeUpdate();
-	response.sendRedirect("comment_content.jsp");
+	response.sendRedirect("comment_list.jsp");
 %>
 <body>
 

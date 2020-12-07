@@ -2,22 +2,16 @@
     pageEncoding="EUC-KR"%>
 <%@ page import = "java.sql.*" %>
 <% request.setCharacterEncoding("EUC-KR"); %>
-<%@ page import="java.util.Date" %>
-<%@ page import="java.text.SimpleDateFormat" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>수정</title>
+<title>탈퇴</title>
 </head>
 <%
 Connection conn = null;
 PreparedStatement pstmt = null;
 ResultSet rs = null;
-
-Date nowTime=new Date();
-SimpleDateFormat sf=new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
-String comment=request.getParameter("comment");
 String id=request.getParameter("id");
 String driver = "oracle.jdbc.driver.OracleDriver";
 String url = "jdbc:oracle:thin:@localhost:1521:xe";
@@ -26,15 +20,14 @@ try{
 	Class.forName(driver);
 	
 	conn = DriverManager.getConnection(url, "hr", "hr");
-	String sql = "insert into comment1 values(comment1_seq.nextval,?,?,?)";
+
+	String sql = "delete from comment2 where id=?";
 	pstmt = conn.prepareStatement(sql); 
-	Clob clob=conn.createClob();
-	pstmt.setString(1,sf.format(nowTime));
-	pstmt.setString(2,comment);
-	pstmt.setString(3,id);
+	pstmt.setString(1,id);
 	int res=pstmt.executeUpdate();
-	response.sendRedirect("comment_content.jsp");
-%>
+
+	%>
+		
 <body>
 
 </body>
