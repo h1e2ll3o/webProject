@@ -2,24 +2,56 @@ package UserDatabase;
 
 import java.sql.*;
 import java.util.*;
-import UserDatabase.*;
 
 public class UserBean {
-	DBconnect DB = new DBconnect();
+	private Connection conn = null;
+	private ResultSet rs = null;
+	PreparedStatement pstmt = null;
+		
+	//데이터베이스 연동 관련 정보 문서 선언
+	String jdbcDriver = "oracle.jdbc.driver.OracleDriver";
+	String jdbcURL = "jdbc:oracle:thin:@localhost:1521:orcl";
+	
+	//데이터베이스 연결
+	void connect() {
+		try {
+			//드라이브 로드
+			Class.forName(jdbcDriver);
+			//데이터베이스 연결
+		    conn = DriverManager.getConnection(jdbcURL,"scott","hg0331");
+		} catch (Exception e) {	e.printStackTrace();}
+	}
+	
+	void disconnect() {
+		if(pstmt != null) {
+			try {
+				pstmt.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if(conn != null) {
+			try {
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
 	public boolean update(User user) {
-		DB.connect();
+		connect();
 		
 		String sql="update login set id=?, pw=?, name=?, blog=?, email=?";
 		try {
-			DB.pstmt = DB.conn.prepareStatement(sql);
-			DB.pstmt.setString(1, user.getId());
-			DB.pstmt.setString(2, user.getPw());
-			DB.pstmt.setString(3, user.getName());
-			DB.pstmt.setString(4, user.getBlog());
-			DB.pstmt.setString(5, user.getEmail());
-			DB.pstmt.executeUpdate();
-			DB.disconnect();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user.getId());
+			pstmt.setString(2, user.getPw());
+			pstmt.setString(3, user.getName());
+			pstmt.setString(4, user.getBlog());
+			pstmt.setString(5, user.getEmail());
+			pstmt.executeUpdate();
+			disconnect();
 			return true;
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -28,14 +60,14 @@ public class UserBean {
 	}
 	
 	public boolean delete(String id) {
-		DB.connect();
+		connect();
 		
 		String sql = "delete from login where id=?";
 		try {
-			DB.pstmt = DB.conn.prepareStatement(sql);
-			DB.pstmt.setString(1, id);
-			DB.pstmt.executeUpdate();
-			DB.disconnect();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.executeUpdate();
+			disconnect();
 			return true;
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -44,115 +76,113 @@ public class UserBean {
 	}
 	
 	public boolean insert(User user) {
-		DB.connect();
+		connect();
 		String sql = "insert into login values (login_seq.nextval, ?, ?, ?, ?, ?)";
 		try {
-			DB.pstmt = DB.conn.prepareStatement(sql);
-			DB.pstmt.setString(1, user.getId());
-			DB.pstmt.setString(2, user.getPw());
-			DB.pstmt.setString(3, user.getName());
-			DB.pstmt.setString(4, user.getBlog());
-			DB.pstmt.setString(5, user.getEmail());
-			DB.pstmt.executeUpdate();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user.getId());
+			pstmt.setString(2, user.getPw());
+			pstmt.setString(3, user.getName());
+			pstmt.setString(4, user.getBlog());
+			pstmt.setString(5, user.getEmail());
+			pstmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
 		finally {
-			DB.disconnect();
+			disconnect();
 		}
 		return true;
 	}
 	
 	public ArrayList<User> getDBList(){
-		DB.connect();
+		connect();
 		ArrayList<User> datas = new ArrayList<User>();
 		
 		String sql = "select * from login order by no desc";
 		try {
-			DB.pstmt = DB.conn.prepareStatement(sql);
-			DB.rs = DB.pstmt.executeQuery();
-			while(DB.rs.next()) {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
 				User user = new User();
-				user.setNo(DB.rs.getInt("no"));
-				user.setId(DB.rs.getString("id"));
-				user.setPw(DB.rs.getString("pw"));
-				user.setName(DB.rs.getString("name"));
-				user.setBlog(DB.rs.getString("blog"));
-				user.setEmail(DB.rs.getString("email"));
+				user.setNo(rs.getInt("no"));
+				user.setId(rs.getString("id"));
+				user.setPw(rs.getString("pw"));
+				user.setName(rs.getString("name"));
+				user.setBlog(rs.getString("blog"));
+				user.setEmail(rs.getString("email"));
 				datas.add(user);
 			}
-			DB.rs.close();
-			DB.disconnect();
+			rs.close();
+			disconnect();
 		
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
 		finally {
-			DB.disconnect();
+			disconnect();
 		}
 		return datas;
 	}
 	
 	public User getDB(String id) {
-		DB.connect();
+		connect();
 		
 		String sql = "select * from login where id=?";
 		User user = new User();
 		try {
-			DB.pstmt = DB.conn.prepareStatement(sql);
-			DB.pstmt.setString(1,id);
-			DB.rs = DB.pstmt.executeQuery();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,id);
+			rs = pstmt.executeQuery();
 			
-			DB.rs.next();
-			user.setNo(DB.rs.getInt("no"));
-			user.setId(DB.rs.getString("id"));
-			user.setPw(DB.rs.getString("pw"));
-			user.setName(DB.rs.getString("name"));
-			user.setBlog(DB.rs.getString("blog"));
-			user.setEmail(DB.rs.getString("email"));
-			DB.rs.close();
+			rs.next();
+			user.setNo(rs.getInt("no"));
+			user.setId(rs.getString("id"));
+			user.setPw(rs.getString("pw"));
+			user.setName(rs.getString("name"));
+			user.setBlog(rs.getString("blog"));
+			user.setEmail(rs.getString("email"));
+			rs.close();
 			
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
 		finally {
-			DB.disconnect();
+			disconnect();
 		}
 		return user;
 	}
 	
-	public int check_id(String id) {
-		DB.connect();
-		String sql = "select * from login where id = ?";
+	public boolean check_id(String id) {
+		connect();
+		String sql = "select * from login id = ?";
 		
 		try {
-			DB.pstmt = DB.conn.prepareStatement(sql);
-			DB.pstmt.setString(1,id);
-			DB.rs = DB.pstmt.executeQuery();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,id);
+			rs = pstmt.executeQuery();
 			
-			if(DB.rs.next()) {return 0;}
-			else {return 1;}
+			disconnect();
+			if(rs.next()) {return false;}
+			else {return true;}
 		} catch(SQLException e) {
 			e.printStackTrace();
-			return -1;
-		}
-		finally {
-			DB.disconnect();
+			return false;
 		}
 	}
 	
 	public boolean login(String id, String pw) {
-		DB.connect();
+		connect();
 		String sql = "select pw from login where id=?";
 		
 		try {
-			DB.pstmt = DB.conn.prepareStatement(sql);
-			DB.pstmt.setString(1,id);
-			DB.rs = DB.pstmt.executeQuery();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,id);
+			rs = pstmt.executeQuery();
 			
-			if(DB.rs.next()) {
-				if(DB.rs.getString(1).equals(pw)) {
+			if(rs.next()) {
+				if(rs.getString(1).equals(pw)) {
 					return true;
 				}else {return false;}
 			} else

@@ -20,13 +20,13 @@
 	user.setBlog(blog);
 	user.setEmail(email);
 	
-	if(userbean.check_id(id)==1){
+	if(userbean.check_id(id)){
 		if(userbean.insert(user)){
 			response.sendRedirect("login.jsp");
 		} else{
 			%><script>alert('입력오류');history.back(-1);</script><%
 		}
-	} else if(userbean.check_id(id)==0){
+	} else{
 		%><script>alert('아이디 중복');history.back(-1);</script><%
 	}
 	
