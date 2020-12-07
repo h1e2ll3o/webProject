@@ -15,29 +15,29 @@
 				</div>
 			</td>
 			<td width="480" height="450" background="./images/bg_center_rect.jpg">
-				<div align=center>
-					<table width="470" align="center">
-						<tr width="70" align="center">
-							<td colspan="3">사진첩</td>
+				<div style="text-align:center">
+					<table width="470" height="440" align="center" cellspacing="7" bgcolor="#FFFFFF">
+						<tr height="50">
+							<td colspan="3"><font face="굴림" style="font-size:15pt;">사진첩</font></td>
 						</tr>
-						<tr width="110" align="center">
-							<td></td>
-							<td></td>
-							<td></td>
+						<tr>
+							<td>gf</td>
+							<td>gf</td>
+							<td>gf</td>
 						</tr>
-						<tr width="110" align="center">
-							<td></td>
-							<td></td>
-							<td></td>
+						<tr>
+							<td>gf</td>
+							<td>gf</td>
+							<td>gf</td>
 						</tr>
-						<tr width="110" align="center">
-							<td></td>
-							<td></td>
-							<td></td>
+						<tr>
+							<td>gf</td>
+							<td>gf</td>
+							<td>gf</td>
 						</tr>
-						<tr width="70" align="center">
-							<td colspan="2"></td>
-							<td><input type="button" name="make" value="작성"/></td>
+						<tr height="50">
+							<td colspan="3"><form action="./photoWrite.jsp" method="post">
+							<input type="submit" name="make" value="글쓰기"/></form></td>
 						</tr>
 					</table>
 				</div>
@@ -46,7 +46,7 @@
 				<%--카테고리 디자인 변경 --%>
 				<input type="image" width="70" height="35" border="0" onclick="location.href='./main.jsp'" src="./images/home.jpg"/><br>
 				<input type="image" width="70" height="35" border="0" onclick="location.href='./profile.jsp'" src="./images/profile.jpg"/><br>
-				<input type="image" width="70" height="35" border="0" onclick="location.href='./main.jsp'" src="./images/diary.jpg"/><br>
+				<input type="image" width="70" height="35" border="0" onclick="location.href='./diary_total.jsp'" src="./images/diary.jpg"/><br>
 				<input type="image" width="70" height="35" border="0" onclick="location.href='./photo.jsp'" src="./images/photo.jpg"/><br>
 				<input type="image" width="70" height="35" border="0" onclick="location.href='./comment.jsp'" src="./images/comment.jpg"/><br><br><br><br><br><br>
 			</td>

@@ -10,7 +10,6 @@ public class PhotoBean {
 	// 게시물 개수
 	public int getMaxNum() {
 		DB.connect();
-		
 		int maxNum = 0;
 		try {
 			String sql = "select nvl(max(no),0) from photo";
