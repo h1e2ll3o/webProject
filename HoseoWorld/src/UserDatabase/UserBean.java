@@ -6,6 +6,7 @@ import UserDatabase.*;
 
 public class UserBean {
 	DBconnect DB = new DBconnect();
+	ResultSet rs = null;
 	
 	public boolean update(User user) {
 		DB.connect();
@@ -71,18 +72,18 @@ public class UserBean {
 		String sql = "select * from login order by no desc";
 		try {
 			DB.pstmt = DB.conn.prepareStatement(sql);
-			DB.rs = DB.pstmt.executeQuery();
-			while(DB.rs.next()) {
+			rs = DB.pstmt.executeQuery();
+			while(rs.next()) {
 				User user = new User();
-				user.setNo(DB.rs.getInt("no"));
-				user.setId(DB.rs.getString("id"));
-				user.setPw(DB.rs.getString("pw"));
-				user.setName(DB.rs.getString("name"));
-				user.setBlog(DB.rs.getString("blog"));
-				user.setEmail(DB.rs.getString("email"));
+				user.setNo(rs.getInt("no"));
+				user.setId(rs.getString("id"));
+				user.setPw(rs.getString("pw"));
+				user.setName(rs.getString("name"));
+				user.setBlog(rs.getString("blog"));
+				user.setEmail(rs.getString("email"));
 				datas.add(user);
 			}
-			DB.rs.close();
+			rs.close();
 			DB.disconnect();
 		
 		} catch(SQLException e) {
@@ -102,16 +103,16 @@ public class UserBean {
 		try {
 			DB.pstmt = DB.conn.prepareStatement(sql);
 			DB.pstmt.setString(1,id);
-			DB.rs = DB.pstmt.executeQuery();
+			rs = DB.pstmt.executeQuery();
 			
-			DB.rs.next();
-			user.setNo(DB.rs.getInt("no"));
-			user.setId(DB.rs.getString("id"));
-			user.setPw(DB.rs.getString("pw"));
-			user.setName(DB.rs.getString("name"));
-			user.setBlog(DB.rs.getString("blog"));
-			user.setEmail(DB.rs.getString("email"));
-			DB.rs.close();
+			rs.next();
+			user.setNo(rs.getInt("no"));
+			user.setId(rs.getString("id"));
+			user.setPw(rs.getString("pw"));
+			user.setName(rs.getString("name"));
+			user.setBlog(rs.getString("blog"));
+			user.setEmail(rs.getString("email"));
+			rs.close();
 			
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -129,10 +130,10 @@ public class UserBean {
 		try {
 			DB.pstmt = DB.conn.prepareStatement(sql);
 			DB.pstmt.setString(1,id);
-			DB.rs = DB.pstmt.executeQuery();
+			rs = DB.pstmt.executeQuery();
 			
 			DB.disconnect();
-			if(DB.rs.next()) {return 0;}
+			if(rs.next()) {return 0;}
 			else {return 1;}
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -147,10 +148,10 @@ public class UserBean {
 		try {
 			DB.pstmt = DB.conn.prepareStatement(sql);
 			DB.pstmt.setString(1,id);
-			DB.rs = DB.pstmt.executeQuery();
+			rs = DB.pstmt.executeQuery();
 			
-			if(DB.rs.next()) {
-				if(DB.rs.getString(1).equals(pw)) {
+			if(rs.next()) {
+				if(rs.getString(1).equals(pw)) {
 					return true;
 				}else {return false;}
 			} else

@@ -11,6 +11,7 @@
 	String pw = request.getParameter("pw");
 	
 	if(userbean.login(id, pw)){
+		session.setAttribute("userID", id);
 		response.sendRedirect("main.jsp");
 	}else{
 		%><script>alert('로그인 불가');history.back(-1);</script><%

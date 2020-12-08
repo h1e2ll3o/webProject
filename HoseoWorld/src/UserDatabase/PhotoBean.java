@@ -6,7 +6,7 @@ import UserDatabase.*;
 
 public class PhotoBean {
 	DBconnect DB = new DBconnect();
-	
+	ResultSet rs = null;
 	// 게시물 개수
 	public int getMaxNum() {
 		DB.connect();
@@ -14,10 +14,10 @@ public class PhotoBean {
 		try {
 			String sql = "select nvl(max(no),0) from photo";
 			DB.pstmt = DB.conn.prepareStatement(sql);
-			DB.rs = DB.pstmt.executeQuery();
+			rs = DB.pstmt.executeQuery();
 			
-			if(DB.rs.next()) {
-				maxNum = DB.rs.getInt(1);
+			if(rs.next()) {
+				maxNum = rs.getInt(1);
 			}
 			DB.disconnect();
 		} catch(Exception e) {
@@ -27,73 +27,72 @@ public class PhotoBean {
 	}
 	
 	// 게시물 입력
-	public void insert(Photo update) {
+	public boolean insert(Photo update) {
 		DB.connect();
+		boolean flag = false;
+		
 		try {
-			String sql="insert into photo values (?, ?,?,?)";
+
+			String sql="insert into photo(no, id, subject, savefilename, contents, savedate, savefilesize)"
+					+ " values((select nvl(max(no),0)+1 from photo), ?, ?, ?, ?, sysdate, ?)";
+			
 			DB.pstmt = DB.conn.prepareStatement(sql);
-			DB.pstmt.setInt(1, update.getNo());
-			DB.pstmt.setString(2, update.getId());
-			DB.pstmt.setString(3, update.getSubject());
-			DB.pstmt.setString(4, update.getSavefilename());
-			DB.pstmt.executeUpdate();
+			DB.pstmt.setString(1, update.getId());
+			DB.pstmt.setString(2, update.getSubject());
+			DB.pstmt.setString(3, update.getSavefilename());
+			DB.pstmt.setString(4, update.getContents());
+			DB.pstmt.setLong(5, update.getSavefilesize());
+			int num = DB.pstmt.executeUpdate();
 			
 			DB.disconnect();
+			if(num==1) {
+				flag = true;
+			}
 		} catch(Exception e) {
-			System.out.println(e.toString());
+			System.out.println("사진 추가 실패 : " + e);
 		}
+		return flag;
 	}
 	
 	//게시물 전체 조회
-	public ArrayList<Photo> getDBList(String id){
+	public synchronized ArrayList<Photo> list(String id){
+		ArrayList<Photo> list = null;
 		DB.connect();
-		ArrayList<Photo> lists = new ArrayList<Photo>();
+		
 		try {
-			String sql = "select * from photo where id = ?";
+			String sql = "select * from photo where id = ? order by no desc";
 			DB.pstmt = DB.conn.prepareStatement(sql);
 			DB.pstmt.setString(1, id);
-			DB.rs = DB.pstmt.executeQuery();
+			rs = DB.pstmt.executeQuery();
 			
-			while(DB.rs.next()) {
-				Photo photo = new Photo();
-				photo.setNo(DB.rs.getInt("no"));
-				photo.setId(DB.rs.getString("id"));
-				photo.setSubject(DB.rs.getString("subject"));
-				photo.setSavefilename(DB.rs.getString("savefilename"));
+			if(rs.next()) {
+				list = new ArrayList<>();
 				
-				lists.add(photo);
+				while(rs.next()) {
+					
+					Photo photo = new Photo();
+					
+					photo.setNo(rs.getInt("no"));
+					photo.setId(rs.getString("id"));
+					photo.setSubject(rs.getString("subject"));
+					photo.setSavefilename(rs.getString("savefilename"));
+					photo.setContents(rs.getString("contents"));
+					photo.setSavedate(rs.getDate("savedate"));
+					photo.setSavefilesize(rs.getInt("savefilesize"));
+					
+					list.add(photo);
+				}
+			}else {
+				list = null;
 			}
+			
 			DB.disconnect();
 			
 		} catch(Exception e) {
 			System.out.println(e.toString());
 		}
-		return lists;
+		return list;
 	}
-	
-	//특정 게시물 조회
-	/*public Photo getRead(int no) {
-		Photo photo = new Photo();
-		connect();
-		try {
-			String sql = "select * from photo where no = ?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, no);
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				photo.setNo(rs.getInt("no"));
-				photo.setId(rs.getString("id"));
-				photo.setSubject(rs.getString("subject"));
-				photo.setSavefilename(rs.getString("savefilename"));
-			}
-			disconnect();
-		} catch(Exception e) {
-			System.out.println(e.toString());
-		}
-		return photo;
-	}*/
-	
 	
 	public void delete(int no) {
 		DB.connect();
@@ -115,9 +114,10 @@ public class PhotoBean {
 		try {
 			String sql = "select nvl(count(*),0) from photo";
 			DB.pstmt = DB.conn.prepareStatement(sql);
-			DB.rs = DB.pstmt.executeQuery();
-			if(DB.rs.next()) {
-				totalDataCount = DB.rs.getInt(1);
+			rs = DB.pstmt.executeQuery();
+			
+			if(rs.next()) {
+				totalDataCount = rs.getInt(1);
 				DB.disconnect();
 			}
 		} catch(Exception e) {
