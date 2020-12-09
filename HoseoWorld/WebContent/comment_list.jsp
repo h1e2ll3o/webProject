@@ -13,13 +13,13 @@ Connection conn = null;
 PreparedStatement pstmt = null;
 ResultSet rs = null;
 String driver = "oracle.jdbc.driver.OracleDriver";
-String url = "jdbc:oracle:thin:@localhost:1521:orcl";
+String url = "jdbc:oracle:thin:@localhost:1521:xe";
 String name;
 
 try{
 	Class.forName(driver);
 	
-	conn = DriverManager.getConnection(url, "scott", "hg0331");
+	conn = DriverManager.getConnection(url, "hr", "hr");
 
 	String sql = "select * from comment1";
 	pstmt = conn.prepareStatement(sql); 
@@ -28,12 +28,19 @@ try{
 		
 %>
 <body>
+<script>
+var _width='400';
+var _height='200';
+var _left=Math.ceil((window.screen.width-_width)/2);
+var _top=Math.ceil((window.screen.height-_height)/2);
+</script>
 <br>
 	<table border="0" bgcolor="#EBEBEB" width="430" cellpadding="1" cellspacing="1" align="center">
 		<tr>
 			<td><font face="±º∏≤" style="font-size:8pt;">NO. <%=rs.getInt("no") %></font></td>
 			<td><font face="±º∏≤" style="font-size:8pt;"><%=rs.getString("time") %></font></td>
-			<td align="right"><font face="±º∏≤" style="font-size:9pt;"><a href="delete.jsp">ªË¡¶</a></font></td>
+			<td align="right"><font face="±º∏≤" style="font-size:9pt;"><a href="delete.jsp" onclick="window.open
+			(this.href,'delete','width='+_width+',height='+_height+',left='+_left+',top='+_top);return false;">ªË¡¶</a></font></td>
 		</tr>
 	</table>
 	<form method=post action="guest.jsp">
@@ -64,7 +71,7 @@ try{
 		<td>
 		<div>
 <font face="±º∏≤" style="font-size:9pt;"><a href=#none id="show" onclick="if(hide.style.display=='none') {hide.style.display='';show.innerText='°„¥Ò±€ ¡¢±‚'} else {hide.style.display='none';show.innerText='¢∫¥Ò±€ ∆Óƒ°±‚'}">¢∫¥Ò±€ ∆Óƒ°±‚</a></font>
-<div id="hide" style="display: none">
+<div class="box" id="hide" style="display: none">
 <iframe frameborder="0" width="480" height="440" src="./guest_list.jsp"></iframe>
 </div>
 </div>

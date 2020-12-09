@@ -6,11 +6,16 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>탈퇴</title>
+<title>댓글 삭제</title>
+<style>
+body {
+background-color:#e6e4e6;
+}
+</style>
 </head>
 <body>
 <center>
-<br><br><br><br><br>방명록 삭제<br><br>
+<br>댓글 삭제<br><br>
 <form method=post action="delete2_action.jsp">   
     <table>                            
          <tr>                                 
