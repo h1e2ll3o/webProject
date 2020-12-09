@@ -67,10 +67,11 @@ var _top=Math.ceil((window.screen.height-_height)/2);
 				<input type="submit" value="È®ÀÎ">
 			</td>
 		</tr></table></form>
+<div align=center>
 <font face="±¼¸²" style="font-size:9pt;"><a href=#none id="show" onclick="if(hide.style.display=='none') {hide.style.display='';show.innerText='¡ã´ñ±Û Á¢±â'} else {hide.style.display='none';show.innerText='¢º´ñ±Û ÆîÄ¡±â'}">¢º´ñ±Û ÆîÄ¡±â</a></font>
 <div class="box" id="hide" style="display: none">
 <iframe frameborder="0" width="440" height="440" src="./guest_list.jsp"></iframe>
-</div>
+</div></div>
 
 </body>
 <%
