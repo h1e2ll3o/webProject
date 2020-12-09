@@ -10,12 +10,12 @@ Connection conn = null;
 PreparedStatement pstmt = null;
 
 String driver = "oracle.jdbc.driver.OracleDriver";
-String url = "jdbc:oracle:thin:@localhost:1522:orcl";
+String url = "jdbc:oracle:thin:@localhost:1521:orcl";
 
 try{
 	Class.forName(driver);
 	
-	conn = DriverManager.getConnection(url, "cys", "1234");
+	conn = DriverManager.getConnection(url, "scott", "hg0331");
 	
 	
 	
@@ -84,20 +84,10 @@ try{
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-    <head>
-    
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>다이어리 달력</title>
 
-     
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>다이어리 달력</title>
-        <style type="text/css">
-            *{padding: 0px; margin: 0px;}  
-            body{font-size: 9pt;}
-            td{font-size: 9pt;}
-          a{cusor: pointer; color: #000000; text-decoration: none; font-size: 9pt; line-height: 150%;}
-            a:HOVER, a:ACTIVE{font-size: 9pt; color: #F28011; text-decoration: underline;}
-            
-        </style>
        <script type="text/javascript">
       
 
@@ -109,6 +99,13 @@ try{
             }
         </script>
     </head>
+    <style type="text/css">
+*{padding: 0px; margin: 0px;}  
+body{font-size: 9pt;}
+td{font-size: 9pt;}
+a{cusor: pointer; color: #000000; text-decoration: none; font-size: 9pt; line-height: 150%;}
+a:HOVER, a:ACTIVE{font-size: 9pt; color: #F28011; text-decoration: underline;}
+</style>
     <body>
        
            

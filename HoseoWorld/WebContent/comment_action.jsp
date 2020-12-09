@@ -13,19 +13,19 @@
 <%
 Connection conn = null;
 PreparedStatement pstmt = null;
-ResultSet rs = null;
+//ResultSet rs = null;
 
 Date nowTime=new Date();
 SimpleDateFormat sf=new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
 String comment=request.getParameter("comment");
 String id=request.getParameter("id");
 String driver = "oracle.jdbc.driver.OracleDriver";
-String url = "jdbc:oracle:thin:@localhost:1521:xe";
+String url = "jdbc:oracle:thin:@localhost:1521:orcl";
 
 try{
 	Class.forName(driver);
 	
-	conn = DriverManager.getConnection(url, "hr", "hr");
+	conn = DriverManager.getConnection(url, "scott", "hg0331");
 	String sql = "insert into comment1 values(comment1_seq.nextval,?,?,?)";
 	pstmt = conn.prepareStatement(sql); 
 	Clob clob=conn.createClob();
@@ -39,7 +39,7 @@ try{
 
 </body>
 <%
-	rs.close();
+	//rs.close();
 	pstmt.close();
 	conn.close();
 	

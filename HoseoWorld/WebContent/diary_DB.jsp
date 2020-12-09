@@ -16,12 +16,12 @@ Connection conn = null;
 PreparedStatement pstmt = null;
 
 String driver = "oracle.jdbc.driver.OracleDriver";
-String url = "jdbc:oracle:thin:@localhost:1522:orcl";
+String url = "jdbc:oracle:thin:@localhost:1521:orcl";
 
 try{
 	Class.forName(driver);
 	
-	conn = DriverManager.getConnection(url, "cys", "1234");
+	conn = DriverManager.getConnection(url, "scott", "hg0331");
 	
 	
 	

@@ -15,8 +15,8 @@
 					<iframe frameborder="0" width="160" height="440" src="./diary_calendar.jsp"></iframe>
 				</div>
 			</td>
-			<td width="480" height="450" background="./images/bg_center_rect.jpg">
-				<div align=center>
+			<td width="480" height="450" background="./images/bg_center_rect.jpg" >
+				<div align=center >
 					<iframe frameborder="0" width="450" height="430" src="./diary_test.html"></iframe>
 				</div>
 			</td>

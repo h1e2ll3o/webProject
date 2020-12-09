@@ -14,12 +14,12 @@ PreparedStatement pstmt = null;
 ResultSet rs = null;
 String id=request.getParameter("id");
 String driver = "oracle.jdbc.driver.OracleDriver";
-String url = "jdbc:oracle:thin:@localhost:1521:xe";
+String url = "jdbc:oracle:thin:@localhost:1521:orcl";
 
 try{
 	Class.forName(driver);
 	
-	conn = DriverManager.getConnection(url, "hr", "hr");
+	conn = DriverManager.getConnection(url, "scott", "hg0331");
 
 	String sql = "delete from comment1 where id=?";
 	pstmt = conn.prepareStatement(sql); 

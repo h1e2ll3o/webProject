@@ -18,12 +18,12 @@ String pw=request.getParameter("pw");
 String blog=request.getParameter("blog");
 String email=request.getParameter("email");
 String driver = "oracle.jdbc.driver.OracleDriver";
-String url = "jdbc:oracle:thin:@localhost:1521:xe";
+String url = "jdbc:oracle:thin:@localhost:1521:orcl";
 
 try{
 	Class.forName(driver);
 	
-	conn = DriverManager.getConnection(url, "hr", "hr");
+	conn = DriverManager.getConnection(url, "scott", "hg0331");
 
 	String sql = "update login set pw=?, name=?, blog=?, email=?";
 	pstmt = conn.prepareStatement(sql); 
