@@ -13,13 +13,13 @@ Connection conn = null;
 PreparedStatement pstmt = null;
 ResultSet rs = null;
 String driver = "oracle.jdbc.driver.OracleDriver";
-String url = "jdbc:oracle:thin:@localhost:1521:xe";
+String url = "jdbc:oracle:thin:@localhost:1521:orcl";
 String name;
 
 try{
 	Class.forName(driver);
 	
-	conn = DriverManager.getConnection(url, "hr", "hr");
+	conn = DriverManager.getConnection(url, "scott", "hg0331");
 
 	String sql = "select * from comment2";
 	pstmt = conn.prepareStatement(sql); 

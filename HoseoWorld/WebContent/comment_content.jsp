@@ -9,7 +9,14 @@
 <meta charset="UTF-8">
 <title>방명록</title>
 </head>
-
+<style>
+	body{
+		-ms-overflow-style: none;
+	}
+	::webkit-scrollbar{
+		display: none;
+	}
+</style>
 <body topmargin="0" leftmargin="0">
 	<form method=post action="comment_action.jsp">
 

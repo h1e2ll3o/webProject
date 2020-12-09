@@ -59,7 +59,7 @@ public class PhotoBean {
 		DB.connect();
 		
 		try {
-			String sql = "select * from photo where id = ? order by no desc";
+			String sql = "select * from photo where id = ? order by savedate desc";
 			DB.pstmt = DB.conn.prepareStatement(sql);
 			DB.pstmt.setString(1, id);
 			DB.rs = DB.pstmt.executeQuery();

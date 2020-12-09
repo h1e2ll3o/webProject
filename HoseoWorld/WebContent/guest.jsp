@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="UTF-8"%>
 <%@ page import = "java.sql.*" %>
 <% request.setCharacterEncoding("EUC-KR"); %>
 <%@ page import="java.util.Date" %>
@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>수정</title>
+<title>�닔�젙</title>
 </head>
 <%
 Connection conn = null;
