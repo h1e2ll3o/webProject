@@ -9,6 +9,7 @@ import java.sql.SQLException;
 public class DBconnect {
 	static Connection conn = null;
 	static PreparedStatement pstmt = null;
+	static ResultSet rs = null;
 		
 	//데이터베이스 연동 관련 정보 문서 선언
 	String jdbcDriver = "oracle.jdbc.driver.OracleDriver";

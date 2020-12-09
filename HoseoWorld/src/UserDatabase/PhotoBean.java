@@ -6,7 +6,6 @@ import UserDatabase.*;
 
 public class PhotoBean {
 	DBconnect DB = new DBconnect();
-	ResultSet rs = null;
 	// 게시물 개수
 	public int getMaxNum() {
 		DB.connect();
@@ -14,10 +13,10 @@ public class PhotoBean {
 		try {
 			String sql = "select nvl(max(no),0) from photo";
 			DB.pstmt = DB.conn.prepareStatement(sql);
-			rs = DB.pstmt.executeQuery();
+			DB.rs = DB.pstmt.executeQuery();
 			
-			if(rs.next()) {
-				maxNum = rs.getInt(1);
+			if(DB.rs.next()) {
+				maxNum = DB.rs.getInt(1);
 			}
 			DB.disconnect();
 		} catch(Exception e) {
@@ -63,22 +62,22 @@ public class PhotoBean {
 			String sql = "select * from photo where id = ? order by no desc";
 			DB.pstmt = DB.conn.prepareStatement(sql);
 			DB.pstmt.setString(1, id);
-			rs = DB.pstmt.executeQuery();
+			DB.rs = DB.pstmt.executeQuery();
 			
-			if(rs.next()) {
+			if(DB.rs.next()) {
 				list = new ArrayList<>();
 				
-				while(rs.next()) {
+				while(DB.rs.next()) {
 					
 					Photo photo = new Photo();
 					
-					photo.setNo(rs.getInt("no"));
-					photo.setId(rs.getString("id"));
-					photo.setSubject(rs.getString("subject"));
-					photo.setSavefilename(rs.getString("savefilename"));
-					photo.setContents(rs.getString("contents"));
-					photo.setSavedate(rs.getDate("savedate"));
-					photo.setSavefilesize(rs.getInt("savefilesize"));
+					photo.setNo(DB.rs.getInt("no"));
+					photo.setId(DB.rs.getString("id"));
+					photo.setSubject(DB.rs.getString("subject"));
+					photo.setSavefilename(DB.rs.getString("savefilename"));
+					photo.setContents(DB.rs.getString("contents"));
+					photo.setSavedate(DB.rs.getDate("savedate"));
+					photo.setSavefilesize(DB.rs.getInt("savefilesize"));
 					
 					list.add(photo);
 				}
@@ -114,10 +113,10 @@ public class PhotoBean {
 		try {
 			String sql = "select nvl(count(*),0) from photo";
 			DB.pstmt = DB.conn.prepareStatement(sql);
-			rs = DB.pstmt.executeQuery();
+			DB.rs = DB.pstmt.executeQuery();
 			
-			if(rs.next()) {
-				totalDataCount = rs.getInt(1);
+			if(DB.rs.next()) {
+				totalDataCount = DB.rs.getInt(1);
 				DB.disconnect();
 			}
 		} catch(Exception e) {

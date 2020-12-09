@@ -1,28 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR" %>
+    pageEncoding="UTF-8" %>
 <%@ page import="UserDatabase.userDAO" %>
 <%request.setCharacterEncoding("UTF-8");%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>È¸¿ø°¡ÀÔ</title>
+<meta charset="UTF-8">
+<title>íšŒì›ê°€ì…</title>
 	<script type="text/javascript">
 		function checkValue(){
 			if(!document.userInfo.id.value){
-				alert("¾ÆÀÌµğ¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+				alert("ì•„ì´ë””ë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
 				return false;
 			}
 			if(!document.userInfo.pw.value){
-				alert("ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+				alert("ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
 				return false;
 			}
 			if(document.userInfo.pw.value != document.userInfo.checkPW.value){
-				alert("ºñ¹Ğ¹øÈ£°¡ ¼­·Î ¸ÂÁö ¾Ê½À´Ï´Ù.");
+				alert("ë¹„ë°€ë²ˆí˜¸ê°€ ì„œë¡œ ë§ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 				return false;
 			}
 			if(!document.userInfo.email1.value){
-				alert("ÀÌ¸ŞÀÏÀ» ÀÔ·ÂÇÏ¼¼¿ä.");
+				alert("ì´ë©”ì¼ì„ ì…ë ¥í•˜ì„¸ìš”.");
 				return false;
 			}
 		}
@@ -34,28 +34,28 @@
 </style>
 <body>
 
-<h1 align="center"><b>È¸¿ø°¡ÀÔ</b></h1>
+<h1 align="center"><b>íšŒì›ê°€ì…</b></h1>
 <div class="content" align="center">
 	<form action="signupAction.jsp" method="POST" name="userInfo" onsubmit="return checkValue()">
 		<table>
 			<tr>
-				<td>¾ÆÀÌµğ</td>
+				<td>ì•„ì´ë””</td>
 				<td><input type="text" name="id" maxlength="15"/></td>
 			</tr>
 			<tr>
-				<td>ÆĞ½º¿öµå</td>
+				<td>íŒ¨ìŠ¤ì›Œë“œ</td>
 				<td><input type="password" name="pw" maxlength="15"/></td>
 			</tr>
 			<tr>
-				<td>ÆĞ½º¿öµå È®ÀÎ</td>
+				<td>íŒ¨ìŠ¤ì›Œë“œ í™•ì¸</td>
 				<td><input type="password" name="checkPW"/></td>
 			</tr>
 			<tr>
-				<td>ÀÌ¸§</td>
+				<td>ì´ë¦„</td>
 				<td><input type="text" name="name" maxlength="15"/></td>
 			</tr>
 			<tr>
-				<td>ÀÌ¸ŞÀÏ</td>
+				<td>ì´ë©”ì¼</td>
 				<td><input type="text" name="email1"/> @
 				<select name="email2">
 					<option>vision.hoseo.edu</option>
@@ -65,12 +65,12 @@
 				</select></td>
 			</tr>
 			<tr>
-				<td>ºí·Î±× ÀÌ¸§</td>
+				<td>ë¸”ë¡œê·¸ ì´ë¦„</td>
 				<td><input type="text" name="blog" maxlength="20"/></td>
 			</tr>
 			<tr>
 				<td></td>
-				<td colspan="2"><input type="submit" value="µî·Ï" /></td>
+				<td colspan="2"><input type="submit" value="ë“±ë¡" /></td>
 			</tr>
 		</table>
 	</form>
