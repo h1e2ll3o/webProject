@@ -24,10 +24,10 @@ background-color:#e6e4e6;
         </tr>
         <tr>
             <th bgcolor ='#e6e4e6'>비밀번호</th>                    
-            <td><input type="text" name="pw"></td>
+            <td><input type="password" name="pw"></td>
         </tr>
     </table><br>
-    <input type="submit" value="삭제하기"><br><br>
+    <input type="submit" value="삭제하기" onclick="window.close()"><br><br>
     </form>
 </body>
 		
