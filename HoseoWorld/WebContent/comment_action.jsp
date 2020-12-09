@@ -34,11 +34,7 @@ try{
 	pstmt.setString(3,id);
 	int res=pstmt.executeUpdate();
 	response.sendRedirect("comment_content.jsp");
-%>
-<body>
 
-</body>
-<%
 	//rs.close();
 	pstmt.close();
 	conn.close();

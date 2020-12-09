@@ -66,18 +66,12 @@ var _top=Math.ceil((window.screen.height-_height)/2);
 					¾ÆÀÌµð ÀÔ·Â  </font><input type="text" name="id"/>
 				<input type="submit" value="È®ÀÎ">
 			</td>
-		</tr>
-		<tr>
-		<td>
-		<div>
+		</tr></table></form>
 <font face="±¼¸²" style="font-size:9pt;"><a href=#none id="show" onclick="if(hide.style.display=='none') {hide.style.display='';show.innerText='¡ã´ñ±Û Á¢±â'} else {hide.style.display='none';show.innerText='¢º´ñ±Û ÆîÄ¡±â'}">¢º´ñ±Û ÆîÄ¡±â</a></font>
 <div class="box" id="hide" style="display: none">
-<iframe frameborder="0" width="480" height="440" src="./guest_list.jsp"></iframe>
+<iframe frameborder="0" width="440" height="440" src="./guest_list.jsp"></iframe>
 </div>
-</div>
-		</td>
-		</tr>
-	</table></form>
+
 </body>
 <%
 	}
