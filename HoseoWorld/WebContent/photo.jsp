@@ -11,6 +11,9 @@
 </style>
 <body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
 <table>
+<%
+	if(session.getAttribute("userID") != null){
+%>
 		<tr>
 			<td width="178px" height="450px" background="./images/bg_left_rect.jpg">
 				<div align=center>
@@ -27,5 +30,12 @@
 			</td>
 		</tr>
 </table>
+<% 
+	} else{
+		out.println("<script>"); 
+		out.println(" location.href='./login.jsp';"); 
+		out.println("</script>"); 
+	}
+%>
 </body>
 </html>

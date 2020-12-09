@@ -9,18 +9,21 @@
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 <%
+	if(session.getAttribute("userID") != null){
+%>
+<%
 
 
 Connection conn = null;
 PreparedStatement pstmt = null;
 
 String driver = "oracle.jdbc.driver.OracleDriver";
-String url = "jdbc:oracle:thin:@localhost:1521:xe";
+String url = "jdbc:oracle:thin:@localhost:1521:orcl";
 
 try{
 	Class.forName(driver);
 	
-	conn = DriverManager.getConnection(url, "hr", "hr");
+	conn = DriverManager.getConnection(url, "scott", "hg0331");
 	
 	
 	
@@ -30,7 +33,7 @@ try{
 	
 	
 	
-	   pstmt.executeUpdate(); 
+	pstmt.executeUpdate(); 
 	
 	
 	
@@ -89,11 +92,15 @@ try{
 	System.out.println(e);
 }
 
-%>
-
-
-			
+%>	
 	</table>
+	<% 
+	} else{
+		out.println("<script>"); 
+		out.println(" location.href='./login.jsp';"); 
+		out.println("</script>"); 
+	}
+%>
 
 </head>
 <body>

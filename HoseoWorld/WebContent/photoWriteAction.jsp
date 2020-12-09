@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="UTF-8"%>
 <%@ page import="java.io.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.sql.*"%>
@@ -16,61 +16,59 @@
 
 <%
 	try{
-		//Ã·ºÎÆÄÀÏ ÀúÀå
+		//ì²¨ë¶€íŒŒì¼ ì €ì¥
 		String saveDirectory = application.getRealPath("/photo");
 		int maxPostSize= 1024*1024*10;
 		String encoding="UTF-8";
+		
+		String item=""; 
+		String fileName=""; //íŒŒì¼ëª… 
 		long fileSize=0;
 		File file = null;
 		
-		//»ç¿ëÀÚ°¡ Àü¼ÛÇÑ ÅØ½ºÆ® Á¤º¸ ¹× ÆÄÀÏÀ» '/photo'¿¡ ÀúÀå
+		//ì‚¬ìš©ìê°€ ì „ì†¡í•œ í…ìŠ¤íŠ¸ ì •ë³´ ë° íŒŒì¼ì„ '/photo'ì— ì €ì¥
 		MultipartRequest mr = new MultipartRequest(request, saveDirectory, maxPostSize, encoding, new DefaultFileRenamePolicy());
 		
-		//mr ÂüÁ¶º¯¼ö°¡ °¡¸®Å°°í ÀÖ´Â ÅØ½ºÆ® Á¤º¸ °¡Á®¿À±â
+		Enumeration files = mr.getFileNames();
+		
+		while(files.hasMoreElements()){
+			item=(String)files.nextElement();
+			fileName=mr.getFilesystemName(item); 
+			
+			if(fileName!=null){ 
+				file=mr.getFile(item); //íŒŒì¼ë‹´ê¸° 
+				
+				if(file.exists()){ //íŒŒì¼ì´ ì¡´ì¬í•˜ëŠ”ê°€ 
+					fileSize = file.length(); 
+				}//if end 
+			}//if end
+		}//while end
+		
+		//mr ì°¸ì¡°ë³€ìˆ˜ê°€ ê°€ë¦¬í‚¤ê³  ìˆëŠ” í…ìŠ¤íŠ¸ ì •ë³´ ê°€ì ¸ì˜¤ê¸°
 		String sub = mr.getParameter("subject").trim();
 		String con = mr.getParameter("contents").trim();
 		
-		//Àü¼ÛÇÑ ÀüÃ¼ ÆÄÀÏ ÀÌ¸§µéÀ» °¡Á®¿È
-		Enumeration files = mr.getFileNames();
-		
-		// Áßº¹Ã³¸®µÈ ÀÌ¸§, Áßº¹ Ã³¸®Àü ½ÇÁ¦ ¿øº» ÀÌ¸§, ÆÄÀÏ »çÀÌÁî
-		String item = (String) files.nextElement();
-		
-		String originalName = mr.getOriginalFileName(item);//ÆÄÀÏ ÀÌ¸§ Áßº¹ Ã³¸®
-		String fileName = mr.getFilesystemName(item); //ÆÄÀÏ´ã±â 
-		out.println("original : "+originalName);
-		out.println("rename : " + fileName);
-		
-		file = mr.getFile(item);	// ½ÇÁ¦ ÆÄÀÏ °¡Á®¿È
-		if(file.exists()){
-			fileSize = file.length(); //½ÇÁ¦ ÆÄÀÏ Å©±â
-		}else{
-			out.println("Nothing");
-		}
-		
-	
-		//3) tb_pdsÅ×ÀÌºí¿¡ Çà Ãß°¡ÇÏ±â 
+		//3) tb_pdsí…Œì´ë¸”ì— í–‰ ì¶”ê°€í•˜ê¸° 
 		photo.setId((String)session.getAttribute("userID"));
 		photo.setSubject(sub); 
 		photo.setSavefilename(fileName); 
 		photo.setContents(con);
 		photo.setSavefilesize(fileSize); 
 		
-		/*boolean flag = photobean.insert(photo); 
+		boolean flag = photobean.insert(photo); 
 		if(flag){ 
-			out.println("insert");
 			out.println("<script>"); 
-			out.println(" alert('»çÁøÀ» Ãß°¡Çß½À´Ï´Ù.')"); 
+			out.println(" alert('ì‚¬ì§„ì„ ì¶”ê°€í–ˆìŠµë‹ˆë‹¤.')"); 
 			out.println(" location.href='photo.jsp';"); 
 			out.println("</script>"); 
 		}else{ 
-			out.println("<p>»çÁø Ãß°¡ ½ÇÆĞ T.T</p>"); 
-			out.println("<script>history.back(-1);</script>");
+			out.println("<p>ì‚¬ì§„ ì¶”ê°€ ì‹¤íŒ¨ T.T</p>"); 
+			out.println("<script>location.href='photoWrite.jsp';</script>");
 		}//if end
-*/
+
 	} catch(Exception e){
 		out.println(e);
-		out.println("<p>¼­¹ö ¿À·ù T.T</p>"); 
-		out.println("<script>history.back(-1);</script>");
+		out.println("<p>ì„œë²„ ì˜¤ë¥˜ T.T</p>"); 
+		out.println("<script>location.href='photoWrite.jsp';</script>");
 	}
 %>

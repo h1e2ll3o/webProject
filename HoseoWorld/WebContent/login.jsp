@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
-
 <style>
 	h1 {
 		margin:80px; color: orange;
@@ -17,6 +16,9 @@
 </style>
 </head>
 <body>
+<%
+	if(session.getAttribute("userID") == null){
+%>
     <div align="center">
 	<img src = "./images/hoseo.jpg"/>
 	<form action="loginAction.jsp" method="POST">
@@ -42,5 +44,12 @@
 	</table>
 	</form>
 	</div>
+<% 
+	} else{
+		out.println("<script>"); 
+		out.println(" location.href='./main.jsp';"); 
+		out.println("</script>"); 
+	}
+%>
 </body>
 </html>

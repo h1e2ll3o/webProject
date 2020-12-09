@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<% request.setCharacterEncoding("utf-8");%>
+    pageEncoding="UTF-8"%>
+<% request.setCharacterEncoding("UTF-8");%>
 <script>
 	function check(f){
 		var subject = f.subject.value;
@@ -13,28 +13,28 @@
 		if(savefile.lengh==0){
 			return false
 		}else{
-			//È®ÀåÀÚ È®ÀÎ
+			//í™•ì¥ì í™•ì¸
 			var dot = savefilename.lastIndexOf(".");
 			var ext = savefilename.substr(dot+1);
 			ext = ext.toLowerCase();
 			
 			if(ext == "png" || ext == "jpg" || ext == "gif" || ext == "bpm"){
 				return true;
-			}else{alert(".png, .jpg, .gif, .bpm È®ÀåÀÚ¸¸ °¡´ÉÇÕ´Ï´Ù."); return false;}
+			}else{alert(".png, .jpg, .gif, .bpm í™•ì¥ìë§Œ ê°€ëŠ¥í•©ë‹ˆë‹¤."); return false;}
 		}
 	}
 </script>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <style>
 	table.type05 {
 	  border-collapse: separate;
 	  border-spacing: 1px;
-	  text-align: left;
+	  text-align: center;
 	  line-height: 1.5;
 	  border-top: 1px solid #ccc;
 	  margin: 20px 10px;
@@ -68,23 +68,23 @@
 						<table class="type05" >
 							<tr>
 								<td colspan="2" style="text-align:center">
-								<font face="±¼¸²" style="font-size:15pt;">»çÁøÃ¸</font>
+								<font face="êµ´ë¦¼" style="font-size:15pt;">ì‚¬ì§„ì²©</font>
 								</td>
 							</tr>
 							<tr>
-								<th scope="row">Á¦¸ñ</th>
-								<td><input type="text" name="subject" placeholder="ÃÖ´ë 20ÀÚ" size="33" maxlength="20"/></td>
+								<th scope="row">ì œëª©</th>
+								<td><input type="text" name="subject" placeholder="ìµœëŒ€ 20ì" size="33" maxlength="20"/></td>
 							</tr>
 							<tr>
-								<th scope="row">³»¿ë</th>
-								<td ><textarea name="contents" placeholder="ÃÖ´ë 290ÀÚ" cols="32" rows="8" maxlength="290"></textarea></td>
+								<th scope="row">ë‚´ìš©</th>
+								<td ><textarea name="contents" placeholder="ìµœëŒ€ 290ì" cols="32" rows="8" maxlength="290"></textarea></td>
 							</tr>
 							<tr>
-								<th scope="row">»çÁø ¼±ÅÃ</th>
+								<th scope="row">ì‚¬ì§„ ì„ íƒ</th>
 								<td><input type="file" name="savefile" accept=".jpg, .bmp, .png, .gif"/></td>
 							</tr>
 							<tr>
-								<td colspan="2" style="text-align:center"><input type="submit" value="µî·Ï"/></td>
+								<td colspan="2" style="text-align:center"><input type="submit" value="ë“±ë¡"/></td>
 							</tr>
 						</table>
 					</form>
