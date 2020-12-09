@@ -40,7 +40,7 @@ try{
 
 				<table bgcolor="#DBDBDB" width="200" align="center" cellpadding="1" cellspacing="1">
 					<tr bgcolor="#FFFFFF" align="center">
-						<td><font face="짹쩌쨍짼" style="font-size:9pt;"><a href="./comment.jsp">방명록 최신 글</a></a></font></td>
+						<td><font face="짹쩌쨍짼" style="font-size:9pt;"><a href="./new_comment.jsp">방명록 최신 글</a></a></font></td>
 					</tr>
 				</table>
 
