@@ -9,19 +9,19 @@
 <title>회원가입</title>
 	<script type="text/javascript">
 		function checkValue(){
-			if(!document.userInfo.inputID.value){
+			if(!document.userInfo.id.value){
 				alert("아이디를 입력하세요.");
 				return false;
 			}
-			if(!document.userInfo.inputPW.value){
+			if(!document.userInfo.pw.value){
 				alert("비밀번호를 입력하세요.");
 				return false;
 			}
-			if(document.userInfo.inputPW.value != document.userInfo.checkPW.value){
+			if(document.userInfo.pw.value != document.userInfo.checkPW.value){
 				alert("비밀번호가 서로 맞지 않습니다.");
 				return false;
 			}
-			if(!document.userInfo.inputEMAIL1.value){
+			if(!document.userInfo.email1.value){
 				alert("이메일을 입력하세요.");
 				return false;
 			}

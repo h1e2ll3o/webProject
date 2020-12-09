@@ -46,7 +46,7 @@ public class UserBean {
 	
 	public boolean insert(User user) {
 		DB.connect();
-		String sql = "insert into login values (login_seq.nextval, ?, ?, ?, ?, ?)";
+		String sql = "insert into login values ((select nvl(max(no),0)+1 from login), ?, ?, ?, ?, ?)";
 		try {
 			DB.pstmt = DB.conn.prepareStatement(sql);
 			DB.pstmt.setString(1, user.getId());
@@ -56,7 +56,7 @@ public class UserBean {
 			DB.pstmt.setString(5, user.getEmail());
 			DB.pstmt.executeUpdate();
 		} catch(SQLException e) {
-			e.printStackTrace();
+			System.out.println(e.toString());
 			return false;
 		}
 		finally {

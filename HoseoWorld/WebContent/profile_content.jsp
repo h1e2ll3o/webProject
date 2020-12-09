@@ -9,7 +9,6 @@
 <head>
 <meta charset="EUC-KR">
 <title>프로필 내용</title>
-
 </head>
 <%
 Connection conn = null;
@@ -32,7 +31,7 @@ try{
 %>
 
 <body>
-<center>
+<div align="center" class='container'>
 <br><br><br><br><br>회원 정보<br><br>   
     <table>                            
          <tr>                                 

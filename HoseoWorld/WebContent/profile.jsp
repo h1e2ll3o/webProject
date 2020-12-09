@@ -7,6 +7,12 @@
 <meta charset="EUC-KR">
 <title>프로필</title>
 </head>
+<style>
+.container::-webkit-scrollbar {
+   	width: 10px;
+    background-color: black;
+}
+</style>
 <body  bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
 	<table>
 		<tr>
@@ -15,8 +21,8 @@
 					<iframe frameborder="0" width="160" height="440" src="./main_profile.html"></iframe>
 				</div>
 			</td>
-			<td width="480" height="450" background="./images/bg_center_rect.jpg">
-				<div align=center>
+			<td width="480" height="450" background="./images/bg_center_rect.jpg" style="-ms-overflow-style: none;">
+				<div align='center' class="container"> 
 					<iframe frameborder="0" width="480" height="440" src="./profile_content.jsp"></iframe>
 				</div>
 			</td>
