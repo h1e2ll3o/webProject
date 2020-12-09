@@ -17,7 +17,7 @@
 			</td>
 			<td width="480" height="450" background="./images/bg_center_rect.jpg">
 				<div align=center>
-					<iframe frameborder="0" width="470" height="430" src="./home.jsp"></iframe>
+					<iframe frameborder="0" width="470" height="430" src="./home_2.jsp"></iframe>
 				</div>
 			</td>
 			<td>

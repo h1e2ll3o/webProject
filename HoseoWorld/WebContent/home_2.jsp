@@ -15,12 +15,12 @@ Connection conn = null;
 PreparedStatement pstmt = null;
 
 String driver = "oracle.jdbc.driver.OracleDriver";
-String url = "jdbc:oracle:thin:@localhost:1522:orcl";
+String url = "jdbc:oracle:thin:@localhost:1521:xe";
 
 try{
 	Class.forName(driver);
 	
-	conn = DriverManager.getConnection(url, "cys", "1234");
+	conn = DriverManager.getConnection(url, "hr", "hr");
 	
 	
 	
@@ -73,7 +73,14 @@ try{
 	i = 1;		
 	}
 	
-	
+	sql = "select * from comment1 where time=(select max(time) from comment1)";
+	pstmt = conn.prepareStatement(sql); 
+	rs=pstmt.executeQuery();
+	while(rs.next()){   
+		out.println("<tr><td bgcolor ='#ffffff'><a href = './new_comment.jsp'>방명록 최신글</a></td>");
+		
+	i = 1;		
+	}
 	rs.close();
 	pstmt.close();
 	conn.close();
