@@ -11,6 +11,7 @@
 		margin:80px; color: orange;
 	}
 	td {
+		text-align:center;
 		padding:10px;
 	}
 </style>
@@ -30,8 +31,9 @@
 		</tr>
 		<tr></tr>
 		<tr>
-			<td><input type="submit" value="로그인"></td>
-			<td><a href="./signup.jsp">회원가입</a></td>
+			<td colspan="2"><input type="submit" value="로그인">
+			&nbsp&nbsp&nbsp<a href="./signup.jsp">회원가입</a>
+			</td>
 		</tr>
 		<tr>
 			<td></td>

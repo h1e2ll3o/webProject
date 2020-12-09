@@ -10,62 +10,82 @@
 <meta charset="EUC-KR">
 <title>프로필 내용</title>
 </head>
+<style>
+	table.type {
+	  border-collapse: separate;
+	  border-spacing: 1px;
+	  text-align: left;
+	  line-height: 1.5;
+	  border-top: 1px solid #ccc;
+	  margin: 20px 10px;
+	}
+	table.type th {
+	  width: 150px;
+	  padding: 10px;
+	  font-weight: bold;
+	  vertical-align: top;
+	  border-bottom: 1px solid #ccc;
+	  background: #EFEFEF;
+	}
+	table.type td {
+	  width: 350px;
+	  padding: 10px;
+	  vertical-align: top;
+	  border-bottom: 1px solid #ccc;
+	}
+</style>
 <%
-Connection conn = null;
-PreparedStatement pstmt = null;
-ResultSet rs = null;
-String driver = "oracle.jdbc.driver.OracleDriver";
-String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-String name;
-
-try{
-	Class.forName(driver);
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	String driver = "oracle.jdbc.driver.OracleDriver";
+	String url = "jdbc:oracle:thin:@localhost:1521:orcl";
+	String name;
 	
-	conn = DriverManager.getConnection(url, "scott", "hg0331");
-
-	String sql = "select * from login";
-	pstmt = conn.prepareStatement(sql); 
-	rs=pstmt.executeQuery();
-	while(rs.next()){
+	try{
+		Class.forName(driver);
 		
+		conn = DriverManager.getConnection(url, "scott", "hg0331");
+	
+		String sql = "select * from login where id =?";
+		pstmt = conn.prepareStatement(sql); 
+		pstmt.setString(1, (String)session.getAttribute("userID"));
+		rs=pstmt.executeQuery();
+		while(rs.next()){	
 %>
 
 <body>
-<div align="center" class='container'>
-<br><br><br><br><br>회원 정보<br><br>   
-    <table>                            
+<div align="center">
+    <table class="type">   
+    	<tr>
+    		<td colspan="2" style="text-align:center;"><strong>회원정보</strong></th>
+    	</tr>                         
          <tr>                                 
-             <th bgcolor ='#e6e4e6'>이름</th>                    
-             <td><%=rs.getString("name")%></td>
+             <th >이름</th>                    
+             <td>&nbsp<%=rs.getString("name")%></td>
         </tr>
         <tr>
-            <th bgcolor ='#e6e4e6'>아이디</th>                     
-            <td><%= rs.getString("id")%></td>
+            <th>아이디</th>                     
+            <td>&nbsp<%= rs.getString("id")%></td>
         </tr>
         <tr>
-            <th bgcolor ='#e6e4e6'>비밀번호</th>                    
-            <td><%= rs.getString("pw")%></td>
+ 			<th>블로그</th>
+            <td>&nbsp<%=rs.getString("blog")%></td>
         </tr>
         <tr>
- 			<th bgcolor ='#e6e4e6'>블로그</th>
-            <td><%=rs.getString("blog")%></td>
-        </tr>
-        <tr>
-            <th bgcolor ='#e6e4e6'>이메일</th>                    
-            <td><%= rs.getString("email")%></td>
+            <th>이메일</th>                    
+            <td>&nbsp<%= rs.getString("email")%></td>
         </tr>
     </table><br>
-    <input type="button" value="수정하기" onclick="location.href='rev.jsp'">
+    <input type="button" value="수정하기" onclick="location.href='rev.jsp'">&nbsp
     <input type="button" value="탈퇴하기" onclick="location.href='drop.jsp'">
 </body>
 		
-</center>	
 <%
 	}
 	rs.close();
 	pstmt.close();
 	conn.close();
-	
 		}catch(Exception e){
 	System.out.println(e);
 }

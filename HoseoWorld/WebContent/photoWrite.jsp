@@ -31,28 +31,28 @@
 <title>Insert title here</title>
 </head>
 <style>
-table.type05 {
-  border-collapse: separate;
-  border-spacing: 1px;
-  text-align: left;
-  line-height: 1.5;
-  border-top: 1px solid #ccc;
-  margin: 20px 10px;
-}
-table.type05 th {
-  width: 150px;
-  padding: 10px;
-  font-weight: bold;
-  vertical-align: top;
-  border-bottom: 1px solid #ccc;
-  background: #EFEFEF;
-}
-table.type05 td {
-  width: 350px;
-  padding: 10px;
-  vertical-align: top;
-  border-bottom: 1px solid #ccc;
-}
+	table.type05 {
+	  border-collapse: separate;
+	  border-spacing: 1px;
+	  text-align: left;
+	  line-height: 1.5;
+	  border-top: 1px solid #ccc;
+	  margin: 20px 10px;
+	}
+	table.type05 th {
+	  width: 150px;
+	  padding: 10px;
+	  font-weight: bold;
+	  vertical-align: top;
+	  border-bottom: 1px solid #ccc;
+	  background: #EFEFEF;
+	}
+	table.type05 td {
+	  width: 350px;
+	  padding: 10px;
+	  vertical-align: top;
+	  border-bottom: 1px solid #ccc;
+	}
 </style>
 <body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
 <table>

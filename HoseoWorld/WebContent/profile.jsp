@@ -7,12 +7,7 @@
 <meta charset="EUC-KR">
 <title>프로필</title>
 </head>
-<style>
-.container::-webkit-scrollbar {
-   	width: 10px;
-    background-color: black;
-}
-</style>
+
 <body  bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
 	<table>
 		<tr>

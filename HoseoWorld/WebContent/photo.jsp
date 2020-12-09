@@ -20,7 +20,31 @@
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 </head>
+<style>
+	table.type {
+	  width: 350px;
+	  border-collapse: separate;
+	  border-spacing: 1px;
+	  text-align: center;
+	  line-height: 1.5;
+	  border-top: 1px solid #ccc;
+	  margin: 20px 10px;
+	}
+	table.type td {
+	  width: 100px;
+	  padding: 10px;
+	  font-weight: bold;
+	  vertical-align: top;
+	  border-bottom: 1px solid #ccc;
+	}
 
+	body{
+		-ms-overflow-style: none;
+	}
+	table.type ::webkit-scrollbar {
+		display: none;
+	}
+</style>
 <body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
 <table>
 		<tr>
@@ -31,11 +55,10 @@
 			</td>
 			<td width="480" height="450" background="./images/bg_center_rect.jpg">
 				<div style="text-align:center">
-					<table width="470" height="440" align="center" cellspacing="7" bgcolor="#FFFFFF">
+					<table class="type" align="center">
 						<tr height="50">
 							<td colspan="3"><font face="굴림" style="font-size:15pt;">사진첩</font></td>
 						</tr>
-						
 						<%
 							ArrayList<Photo> list = photobean.list((String)session.getAttribute("userID"));
 							int newLine = 0;
@@ -53,7 +76,7 @@
 									articleCount++;
 									
 									out.print("<td width='100' height='100'>");
-									out.print("<img src='../photo/"+photo.getSavefilename()+"' alt='"+photo.getSavefilename()+"' width='90' height='90'/><br/>");
+									out.print("<img src='/photo/"+photo.getSavefilename()+"' alt='"+photo.getSavefilename()+"' width='90' height='90'/><br/>");
 									out.print("<p>"+photo.getSubject()+"</p></td>");
 								
 									if(newLine == 3){
