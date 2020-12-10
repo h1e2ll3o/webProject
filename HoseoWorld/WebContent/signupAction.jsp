@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="UTF-8" import="UserDatabase.*, java.util.*"%>
-<%request.setCharacterEncoding("utf-8");%>
+    pageEncoding="EUC-KR" import="UserDatabase.*, java.util.*"%>
+<%request.setCharacterEncoding("EUC-KR");%>
 
 <jsp:useBean id="user" class="UserDatabase.User"/>
 <jsp:useBean id="userbean" class="UserDatabase.UserBean"/>
@@ -20,16 +20,16 @@
 	user.setBlog(blog);
 	user.setEmail(email);
 	
-	if(userbean.check_id(id) == 0){
+	if(userbean.check_id(id) == 1){
 		if(userbean.insert(user)){
 			response.sendRedirect("login.jsp");
 		} else{
-			%><script>alert('ì…ë ¥ì˜¤ë¥˜');history.back(-1);</script><%
+			%><script>alert('ÀÔ·Â¿À·ù');history.back(-1);</script><%
 		}
-	} else if(userbean.check_id(id) == 1){
-		%><script>alert('ì•„ì´ë”” ì¤‘ë³µ');history.back(-1);</script><%
+	} else if(userbean.check_id(id) == 0){
+		%><script>alert('¾ÆÀÌµğ Áßº¹');history.back(-1);</script><%
 	} else{
-		%><script>alert('ì„œë²„ ì˜¤ë¥˜^^');history.back(-1);</script><%
+		%><script>alert('¼­¹ö ¿À·ù^^');history.back(-1);</script><%
 	}
 	
 

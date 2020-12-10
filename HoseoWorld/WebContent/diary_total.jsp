@@ -7,7 +7,9 @@
 <title>다이어리 전체 모습</title>
 </head>
 <body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
-
+<%
+	if(session.getAttribute("userID") != null){
+%>
 <table>
 		<tr>
 			<td width="178" height="450" background="./images/bg_left_rect.jpg">
@@ -33,5 +35,12 @@
 			</td>
 		</tr>
 	</table>
+	<% 
+	} else{
+		out.println("<script>"); 
+		out.println(" location.href='./login.jsp';"); 
+		out.println("</script>"); 
+	}
+%>
 </body>
 </html>

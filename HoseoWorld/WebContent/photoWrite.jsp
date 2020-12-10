@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="UTF-8"%>
-<% request.setCharacterEncoding("UTF-8");%>
+    pageEncoding="EUC-KR"%>
+<% request.setCharacterEncoding("EUC-KR");%>
 <script>
 	function check(f){
 		var subject = f.subject.value;
@@ -13,21 +13,21 @@
 		if(savefile.lengh==0){
 			return false
 		}else{
-			//í™•ì¥ì í™•ì¸
+			//È®ÀåÀÚ È®ÀÎ
 			var dot = savefilename.lastIndexOf(".");
 			var ext = savefilename.substr(dot+1);
 			ext = ext.toLowerCase();
 			
 			if(ext == "png" || ext == "jpg" || ext == "gif" || ext == "bpm"){
 				return true;
-			}else{alert(".png, .jpg, .gif, .bpm í™•ì¥ìë§Œ ê°€ëŠ¥í•©ë‹ˆë‹¤."); return false;}
+			}else{alert(".png, .jpg, .gif, .bpm È®ÀåÀÚ¸¸ °¡´ÉÇÕ´Ï´Ù."); return false;}
 		}
 	}
 </script>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="EUC-KR">
 <title>Insert title here</title>
 </head>
 <style>
@@ -57,41 +57,33 @@
 <body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
 <table>
 		<tr>
-			<td width="178" height="450" background="./images/bg_left_rect.jpg">
-				<div align=center>
-					<iframe frameborder="0" width="160" height="440" src="./main_profile.html"></iframe>
-				</div>
-			</td>
 			<td width="480" height="450" background="./images/bg_center_rect.jpg">
 				<div align=center>
 					<form action="photoWriteAction.jsp" method="post" enctype="Multipart/form-data" onsubmit="return check(this)">
 						<table class="type05" >
 							<tr>
 								<td colspan="2" style="text-align:center">
-								<font face="êµ´ë¦¼" style="font-size:15pt;">ì‚¬ì§„ì²©</font>
+								<font face="±¼¸²" style="font-size:15pt;">»çÁøÃ¸</font>
 								</td>
 							</tr>
 							<tr>
-								<th scope="row">ì œëª©</th>
-								<td><input type="text" name="subject" placeholder="ìµœëŒ€ 20ì" size="33" maxlength="20"/></td>
+								<th scope="row">Á¦¸ñ</th>
+								<td><input type="text" name="subject" placeholder="ÃÖ´ë 20ÀÚ" size="33" maxlength="20"/></td>
 							</tr>
 							<tr>
-								<th scope="row">ë‚´ìš©</th>
-								<td ><textarea name="contents" placeholder="ìµœëŒ€ 290ì" cols="32" rows="8" maxlength="290"></textarea></td>
+								<th scope="row">³»¿ë</th>
+								<td ><textarea name="contents" placeholder="ÃÖ´ë 290ÀÚ" cols="32" rows="8" maxlength="290"></textarea></td>
 							</tr>
 							<tr>
-								<th scope="row">ì‚¬ì§„ ì„ íƒ</th>
+								<th scope="row">»çÁø ¼±ÅÃ</th>
 								<td><input type="file" name="savefile" accept=".jpg, .bmp, .png, .gif"/></td>
 							</tr>
 							<tr>
-								<td colspan="2" style="text-align:center"><input type="submit" value="ë“±ë¡"/></td>
+								<td colspan="2" style="text-align:center"><input type="submit" value="µî·Ï"/></td>
 							</tr>
 						</table>
 					</form>
 				</div>
-			</td>
-			<td>
-				<%@ include file="./menu.jsp" %>	
 			</td>
 		</tr>
 	</table>

@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="UTF-8"%>
+    pageEncoding="EUC-KR"%>
 <%@ page import = "java.sql.*" %>
-<% request.setCharacterEncoding("UTF-8"); %>
+<% request.setCharacterEncoding("EUC-KR"); %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>홈 화면</title>
+<meta charset="EUC-KR">
+<title>Ȩ ȭ��</title>
 </head>
 <%
 	if(session.getAttribute("userID") != null){
@@ -33,7 +33,7 @@ try{
 <body>
 <table bgcolor="#DBDBDB" width="440" cellpadding="1" cellspacing="1">
 		<tr bgcolor="#FFFFFF" >
-			<td colspan="2"><font face="짹쩌쨍짼" style="font-size:9pt;"><b>Updated news</b></font></td>
+			<td colspan="2"><font face="±¼¸²" style="font-size:9pt;"><b>Updated news</b></font></td>
 		</tr>
 		<tr bgcolor="#FFFFFF" >
 			<td width="240">
@@ -43,7 +43,7 @@ try{
 
 				<table bgcolor="#DBDBDB" width="200" align="center" cellpadding="1" cellspacing="1">
 					<tr bgcolor="#FFFFFF" align="center">
-						<td><font face="짹쩌쨍짼" style="font-size:9pt;"><a href="./new_comment.jsp">방명록 최신 글</a></a></font></td>
+						<td><font face="±¼¸²" style="font-size:9pt;"><a href="./new_comment.jsp">����� �ֽ� ��</a></a></font></td>
 					</tr>
 				</table>
 

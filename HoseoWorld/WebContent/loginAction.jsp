@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="UserDatabase.*, java.util.*"%>
-<%request.setCharacterEncoding("utf-8");%>
+<%request.setCharacterEncoding("EUC-KR");%>
 
 <jsp:useBean id="user" class="UserDatabase.User"/>
 <jsp:useBean id="userbean" class="UserDatabase.UserBean"/>

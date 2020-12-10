@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>ë¡œê·¸ì¸</title>
+<meta charset="EUC-KR">
+<title>·Î±×ÀÎ</title>
 <style>
 	h1 {
 		margin:80px; color: orange;
@@ -24,17 +24,17 @@
 	<form action="loginAction.jsp" method="POST">
 	<table>
 		<tr>
-			<td>ì•„ì´ë””</td>
-			<td><input type="text" placeholder="ì•„ì´ë””ë¥¼ ì…ë ¥í•˜ì‹œì˜¤" name="id" size="20"/></td>
+			<td>¾ÆÀÌµğ</td>
+			<td><input type="text" placeholder="¾ÆÀÌµğ¸¦ ÀÔ·ÂÇÏ½Ã¿À" name="id" size="20"/></td>
 		</tr>
 		<tr>
-			<td>íŒ¨ìŠ¤ì›Œë“œ</td>
-			<td><input type="password" placeholder="íŒ¨ìŠ¤ì›Œë“œë¥¼ ì…ë ¥í•˜ì‹œì˜¤" name="pw" size="20"/></td>
+			<td>ÆĞ½º¿öµå</td>
+			<td><input type="password" placeholder="ÆĞ½º¿öµå¸¦ ÀÔ·ÂÇÏ½Ã¿À" name="pw" size="20"/></td>
 		</tr>
 		<tr></tr>
 		<tr>
-			<td colspan="2"><input type="submit" value="ë¡œê·¸ì¸">
-			&nbsp&nbsp&nbsp<a href="./signup.jsp">íšŒì›ê°€ì…</a>
+			<td colspan="2"><input type="submit" value="·Î±×ÀÎ">
+			&nbsp&nbsp&nbsp<a href="./signup.jsp">È¸¿ø°¡ÀÔ</a>
 			</td>
 		</tr>
 		<tr>

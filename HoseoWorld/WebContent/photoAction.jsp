@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="UTF-8"%>
+    pageEncoding="EUC-KR"%>
 <%@ page import="java.io.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.sql.*"%>
@@ -10,13 +10,13 @@
 <jsp:useBean id="photo" class="UserDatabase.Photo"/>
 <jsp:useBean id="photobean" class="UserDatabase.PhotoBean"/>
 
-<% request.setCharacterEncoding("UTF-8");%>
+<% request.setCharacterEncoding("EUC-KR");%>
 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>ë°©ëª…ë¡</title>
+<meta charset="EUC-KR">
+<title>¹æ¸í·Ï</title>
 </head>
 <style>
 	table.type {
@@ -25,7 +25,8 @@
 	  border-spacing: 1px;
 	  align: center;	
 	  line-height: 1.5;
-	  margin: 10px 10px;
+	  border-top: 1px solid #ccc;
+	  border-bottom: 1px solid #ccc;
 	}
 	table.type th {
 	  width: 150px;
@@ -37,8 +38,7 @@
 	  padding: 10px;
 	  text-align: center;
 	  vertical-align: top;
-	  border-bottom: 1px solid #ccc;
-	  border-top: 1px solid #ccc;
+	  
 	}
 	body{
 		-ms-overflow-style: none;
@@ -48,20 +48,15 @@
 	}
 </style>
 <body topmargin="0" leftmargin="0">
-<table class="type">
-	<tr style="background-color:#ddd;">
-		<th colspan="3" height="10px"><font face="êµ´ë¦¼" style="font-size:15pt;">ì‚¬ì§„ì²©</font></th>
+<table class="type" style="margin: 20px 10px 5px 10px;">
+	<tr>
+		<th colspan="3" height="10px"><font face="±¼¸²" style="font-size:15pt;">»çÁøÃ¸</font></th>
 	</tr>
 </table>
-<table class="type">
-	<tr>
-	<th colspan="3" height="5px" style="text-align:left; height: 10px">
-		<form action="./photoWrite.jsp" method="post">
-			<input type="submit" name="make" value="ê¸€ì“°ê¸°"/>
-			<!-- <input type="button" name="del" value="ì‚­ì œ" onclick="<%//photobean.delete();%>"/> -->
-		</form>
-	</th>
-	</tr>
+<form action="./photoWrite.jsp" method="post">
+	&nbsp&nbsp&nbsp<input type="submit" name="make" value="±Û¾²±â"/>
+</form>
+<table class="type" style="margin: 3px 10px;">
 <%
 	ArrayList<Photo> list = new ArrayList<>();
 	list = photobean.list((String)session.getAttribute("userID"));
@@ -69,7 +64,7 @@
 	int newLine = 0;
 	
 	if(list == null){
-		out.println("<tr><td>ê²Œì‹œë¬¼ ì—†ìŒ</td></tr><tr><td></td></tr><tr><td></td></tr>");
+		out.println("<tr><td>°Ô½Ã¹° ¾øÀ½</td></tr><tr><td></td></tr><tr><td></td></tr>");
 	} else{
 		
 		for(int idx=0; idx<list.size(); idx++){ 
@@ -83,8 +78,9 @@
 			%>
 				<td>
 					<img src="./photo/<%=photo.getSavefilename()%>" width="100px">
-					<p><font face="êµ´ë¦¼" style="font-size:10pt;"><%=photo.getSubject()%></font><br/>
-					<font face="êµ´ë¦¼" style="font-size:10pt;"><%=photo.getSavedate()%></font></p>
+					<p><font face="±¼¸²" style="font-size:10pt;"><%=photo.getSubject()%></font><br/>
+					<font face="±¼¸²" style="font-size:10pt;"><%=photo.getSavedate()%></font></p><br />
+					<a onclick="<%photobean.delete(photo.getNo());%>"><font face="±¼¸²" style="font-size:10pt;">»èÁ¦</font></a>
 				</td>
 			 <% 
 			 if(newLine==3){

@@ -1,5 +1,5 @@
 <%@page import="java.util.Calendar"%>
-<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page contentType="text/html; charset=EUC-KR"%>
  <%@ page import = "java.sql.*" %>
 <% request.setCharacterEncoding("EUC-KR"); %>
 
@@ -39,7 +39,7 @@ try{
 %>
 
 <%
-    request.setCharacterEncoding("utf-8");
+    request.setCharacterEncoding("EUC-KR");
     
     Calendar cal = Calendar.getInstance();
     
@@ -72,7 +72,7 @@ try{
     	nextYear=year+1;
     	nextMonth=1;
     }
-    cal.set(year, month-1, 1);    //Ï∂úÎ†•Ìï† ÎÖÑÎèÑ, ÏõîÎ°ú ÏÑ§Ï†ï
+    cal.set(year, month-1, 1);    //√‚∑¬«“ ≥‚µµ, ø˘∑Œ º≥¡§
    
     
     
@@ -86,7 +86,7 @@ try{
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Îã§Ïù¥Ïñ¥Î¶¨ Îã¨Î†•</title>
+<title>¥Ÿ¿ÃæÓ∏Æ ¥ﬁ∑¬</title>
 
        <script type="text/javascript">
       
@@ -111,7 +111,7 @@ a:HOVER, a:ACTIVE{font-size: 9pt; color: #F28011; text-decoration: underline;}
            
        <table border="0" width="150">
 		<tr>
-			<td bgcolor="#DBDBDB" align="center"><font face="Íµ¥Î¶º" style="font-size:8pt;">today is...</font></td>
+			<td bgcolor="#DBDBDB" align="center"><font face="±º∏≤" style="font-size:8pt;">today is...</font></td>
 		</tr>
 		</table>
 		<br>
@@ -121,18 +121,18 @@ a:HOVER, a:ACTIVE{font-size: 9pt; color: #F28011; text-decoration: underline;}
                         <form action ="calendar2.jsp" method="post">
                             <select name="year" onchange="sendIt()">
                                     <%for(int i=year-5; i<year; i++) { %>
-                                        <option value="<%=i%>" > <%=i%>ÎÖÑ</option>
+                                        <option value="<%=i%>" > <%=i%>≥‚</option>
                                     <%} %>
-                                    <option value="<%=year%>" selected="selected"><%=year%>ÎÖÑ</option>
+                                    <option value="<%=year%>" selected="selected"><%=year%>≥‚</option>
                                     <%for(int i=year+1; i<year+5; i++) { %>
-                                        <option value="<%=i%>" > <%=i%>ÎÖÑ</option>
+                                        <option value="<%=i%>" > <%=i%>≥‚</option>
                                     <%} %>
        
                             </select>
                            
                             <select name="month" onchange="sendIt()">
                                 <% for(int i=1; i<=12; i++) {%>
-                                    <option value="<%=i%>" <%=month==i?"selected='selected'":"" %>> <%=i%>Ïõî </option>
+                                    <option value="<%=i%>" <%=month==i?"selected='selected'":"" %>> <%=i%>ø˘ </option>
                                 <%} %>
                             </select>
                                
@@ -143,17 +143,17 @@ a:HOVER, a:ACTIVE{font-size: 9pt; color: #F28011; text-decoration: underline;}
            
             <table width="150" border="0" cellpadding="2" cellspacing="1" bgcolor="#cccccc">
                 <tr height="25">
-                    <td align="center" bgcolor="#e6e4e6"><font color="red">Ïùº</font></td>
-                    <td align="center" bgcolor="#e6e4e6">Ïõî</td>
-                    <td align="center" bgcolor="#e6e4e6">Ìôî</td>
-                    <td align="center" bgcolor="#e6e4e6">Ïàò</td>
-                    <td align="center" bgcolor="#e6e4e6">Î™©</td>
-                    <td align="center" bgcolor="#e6e4e6">Í∏à</td>
-                    <td align="center" bgcolor="#e6e4e6"><font color="blue">ÌÜ†</font></td>
+                    <td align="center" bgcolor="#e6e4e6"><font color="red">¿œ</font></td>
+                    <td align="center" bgcolor="#e6e4e6">ø˘</td>
+                    <td align="center" bgcolor="#e6e4e6">»≠</td>
+                    <td align="center" bgcolor="#e6e4e6">ºˆ</td>
+                    <td align="center" bgcolor="#e6e4e6">∏Ò</td>
+                    <td align="center" bgcolor="#e6e4e6">±›</td>
+                    <td align="center" bgcolor="#e6e4e6"><font color="blue">≈‰</font></td>
                 </tr>
                 <%
                     int newLine = 0;
-                    //1ÏùºÏù¥ Ïñ¥Îäê ÏöîÏùºÏóêÏÑú ÏãúÏûëÌïòÎäêÎÉêÏóê Îî∞Î•∏ ÎπàÏπ∏ ÏÇΩÏûÖ
+                    //1¿œ¿Ã æÓ¥¿ ø‰¿œø°º≠ Ω√¿€«œ¥¿≥ƒø° µ˚∏• ∫Ûƒ≠ ª¿‘
                     out.println("<tr height='25'>");
                     for(int i=1; i<week; i++)
                     {
@@ -203,8 +203,8 @@ try{
 	ResultSet rs = pstmt.executeQuery();
    
 	int i = 1;
-	out.println("ÏµúÏã†Í∏Ä");
-	out.println("<table border=0 width=150 bgcolor ='#e6e4e6' text-decoration: none;><tr><th>Î≤àÌò∏</th><th>ÎÇ†Ïßú</th><th>Ï†úÎ™©</th></tr>");
+	out.println("√÷Ω≈±€");
+	out.println("<table border=0 width=150 bgcolor ='#e6e4e6' text-decoration: none;><tr><th>π¯»£</th><th>≥Ø¬•</th><th>¡¶∏Ò</th></tr>");
 	while(rs.next()){   
 		
 		

@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="UTF-8"%>
-<% request.setCharacterEncoding("UTF-8"); %>
+    pageEncoding="EUC-KR"%>
+<% request.setCharacterEncoding("EUC-KR"); %>
 <%@ page import = "java.sql.*" %>
 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>ë°©ëª…ë¡</title>
+<meta charset="EUC-KR">
+<title>¹æ¸í·Ï</title>
 </head>
 <style>
 	body{
@@ -20,12 +20,12 @@
 <body topmargin="0" leftmargin="0">
 	<form method=post action="comment_action.jsp">
 
-	<!-- íƒ‘, ê¸€ì“°ê¸° -------------------------------------------------------------------------------- -->
+	<!-- Å¾, ±Û¾²±â -------------------------------------------------------------------------------- -->
  	<br><table width="410" border="0" cellpadding="3" cellspacing="1" bgcolor="#DBDBDB" align="center">
 		<tr bgcolor="#FFFFFF">
 			<td align="center"> 
-				<font face="êµ´ë¦¼" style="font-size:9pt;">
-					ë°©ëª…ë¡
+				<font face="±¼¸²" style="font-size:9pt;">
+					¹æ¸í·Ï
 				</font>
 			</td>
 		</tr>
@@ -33,8 +33,8 @@
 	<table width="430" border="0" align="center">
 		<tr>
 			<td align="center">
-				<font face="êµ´ë¦¼" style="font-size:9pt;">
-					ì•„ì´ë”” ìž…ë ¥
+				<font face="±¼¸²" style="font-size:9pt;">
+					¾ÆÀÌµð ÀÔ·Â
 				</font><input type="text" name="id"/>
 			</td>
 		</tr>
@@ -52,7 +52,7 @@
 	<table border="0" width="410" cellpadding="0" cellspacing="0" align="center">
 		<tr>
 			<td width="200" align="right">  
-				<input type="submit" value="í™•ì¸">
+				<input type="submit" value="È®ÀÎ">
 			</td>
 		</tr>
 	</table></form>
