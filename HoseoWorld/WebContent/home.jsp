@@ -31,6 +31,12 @@ try{
 		
 %>
 <body>
+<table>
+<div >
+ <img src="./images/home_center.jpg" width="440" height="250" border="0"/>
+ </div>
+ 
+ </table>
 <table bgcolor="#DBDBDB" width="440" cellpadding="1" cellspacing="1">
 		<tr bgcolor="#FFFFFF" >
 			<td colspan="2"><font face="±¼¸²" style="font-size:9pt;"><b>Updated news</b></font></td>

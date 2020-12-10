@@ -59,7 +59,7 @@
 		if(flag){ 
 			out.println("<script>"); 
 			out.println(" alert('사진을 추가했습니다.')"); 
-			out.println(" location.href='photo.jsp';"); 
+			out.println(" location.href='photoAction.jsp';"); 
 			out.println("</script>"); 
 		}else{ 
 			out.println("<p>사진 추가 실패 T.T</p>"); 

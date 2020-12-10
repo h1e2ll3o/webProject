@@ -28,7 +28,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>사진첩</title>
 </head>
 <style>
 	table.type05 {

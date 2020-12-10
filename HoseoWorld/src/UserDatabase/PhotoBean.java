@@ -85,7 +85,7 @@ public class PhotoBean {
 				list = null;
 			}
 			
-			DB.disconnect();
+			//DB.disconnect();
 			
 		} catch(Exception e) {
 			System.out.println(e.toString());

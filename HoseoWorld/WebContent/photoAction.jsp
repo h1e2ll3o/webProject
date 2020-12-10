@@ -16,7 +16,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>방명록</title>
+<title>사진첩</title>
 </head>
 <style>
 	table.type {
@@ -58,18 +58,15 @@
 </form>
 <table class="type" style="margin: 3px 10px;">
 <%
-	ArrayList<Photo> list = new ArrayList<>();
-	list = photobean.list((String)session.getAttribute("userID"));
-	
-	int newLine = 0;
-	
+	ArrayList<Photo> list = photobean.list((String)session.getAttribute("userID"));
 	if(list == null){
 		out.println("<tr><td>게시물 없음</td></tr><tr><td></td></tr><tr><td></td></tr>");
 	} else{
 		
+		int newLine = 0;
 		for(int idx=0; idx<list.size(); idx++){ 
 			photo=list.get(idx); 
-			
+
 			if(newLine==0){
 				out.println("<tr>");
 			}
@@ -79,8 +76,8 @@
 				<td>
 					<img src="./photo/<%=photo.getSavefilename()%>" width="100px">
 					<p><font face="굴림" style="font-size:10pt;"><%=photo.getSubject()%></font><br/>
-					<font face="굴림" style="font-size:10pt;"><%=photo.getSavedate()%></font></p><br />
-					<a onclick="<%photobean.delete(photo.getNo());%>"><font face="굴림" style="font-size:10pt;">삭제</font></a>
+					<font face="굴림" style="font-size:10pt;"><%=photo.getSavedate()%></font></p>
+					<a  href="#" onclick="<%photobean.delete(photo.getNo());%>">삭제</a>
 				</td>
 			 <% 
 			 if(newLine==3){

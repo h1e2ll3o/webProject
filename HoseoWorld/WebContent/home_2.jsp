@@ -45,15 +45,12 @@ try{
 
 %>
 <body>
-
 <table>
-
 <div >
  <img src="./images/home_center.jpg" width="440" height="250" border="0"/>
  </div>
  
  </table>
- 
 <table bgcolor="#DBDBDB" width="440" cellpadding="1" cellspacing="1">
 
 
